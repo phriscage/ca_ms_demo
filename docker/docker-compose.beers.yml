@@ -1,0 +1,76 @@
+################################################################################
+##
+##  Purpose: Define a miroservice for retrieving beer data from two separate
+##    databases. Define a microservice for validting a JWT and exchanging tokens
+##    Protect both MS with a MSGW and leverage MAS as the OAuth hub.
+##
+##  Email: christopher.page@ca.com
+##
+################################################################################
+version: '3'
+services:
+  lac_ui:
+    image: caliveapicreator/3.2
+    ports:
+    - "80:8080"
+    environment:
+      - SERVICE_IGNORE=yes
+      - RDS_HOSTNAME=lac_mysql
+      - RDS_PORT=3306
+      - RDS_DB_NAME=lac_admin
+      - RDS_USERNAME=lac_admin
+      - RDS_PASSWORD=CAdemo123
+      - ca_accept_license=enu
+    volumes:
+      #- ${PWD}/files/lac/BeerDataComments.json:/usr/local/tomcat/bin/BeerData.json
+      #- ${PWD}/files/lac/BeerData.json:/usr/local/tomcat/bin/BeerData.json
+      #- ${PWD}/files/lac/import_data.sh:/usr/local/tomcat/bin/import_data.sh
+      - ${PWD}/files/lac/StartLiveAPICreator.sh:/usr/local/tomcat/bin/StartLiveAPICreator.sh
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  lac:
+    image: 'caliveapicreator/3.2'
+    environment:
+      - SERVICE_NAME=lac
+      - SERVICE_TAGS=ssg-proxy
+      - RDS_HOSTNAME=lac_mysql
+      - RDS_PORT=3306
+      - RDS_DB_NAME=lac_admin
+      - RDS_USERNAME=lac_admin
+      - RDS_PASSWORD=CAdemo123
+      - ca_accept_license=enu
+      #- ESPRESSO_FORCE_DATASOURCE=true
+  lac_mysql:
+    image: 'mysql:5.6.30'
+    environment:
+      - SERVICE_IGNORE=yes
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=lac_admin
+      - MYSQL_USER=lac_admin
+      - MYSQL_PASSWORD=CAdemo123
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+  mysql_beers:
+    image: mysql:5.7.9
+    environment:
+      - SERVICE_IGNORE=yes
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ${PWD}/files/mysql_beers:/docker-entrypoint-initdb.d
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+  #mysql_beer_comments:
+    #image: mysql:5.7.9
+    #environment:
+      #- MYSQL_ROOT_PASSWORD=root
+    #volumes:
+      #- ${PWD}/files/mysql_beer_comments:/docker-entrypoint-initdb.d
+    #restart: always

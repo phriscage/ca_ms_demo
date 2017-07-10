@@ -1,0 +1,25 @@
+################################################################################
+##
+##  Purpose: Define a miroservice for retrieving beer data from two separate
+##    databases. Define a microservice for validting a JWT and exchanging tokens
+##    Protect both MS with a MSGW and leverage MAS as the OAuth hub.
+##
+##  Email: christopher.page@ca.com
+##
+################################################################################
+version: '3'
+services:
+  api:
+    image: phriscage/msgw_te-api:develop
+    environment:
+      - SERVICE_NAME=api
+      - SERVICE_TAGS=ssg-proxy
+      - MSGW_HOSTNAME=msgw
+  api2:
+    image: phriscage/msgw_te-api:develop
+    environment:
+      - SERVICE_NAME=api2
+      - SERVICE_TAGS=ssg-proxy
+      - MSGW_HOSTNAME=msgw
+    #deploy:
+      #endpoint_mode: dnsrr

@@ -1,0 +1,30 @@
+{
+  "Service": {
+    "name": "Token Exchange Demo",
+    "gatewayUri": "/token",
+    "httpMethods": [ "get", "post" ],
+    "policy": [
+      {
+        "Cors" : {}
+      },
+      {
+        "CredentialSourceHttpBasic": { }
+      },
+      {
+        "RateLimit" : {
+          "maxRequestsPerSecond": 2,
+          "hardLimit": true,
+          "counterName": "RateLimit-Counter"
+      	}
+      },
+      {
+        "RouteHttp" : {
+          "targetUrl" : "http://192.168.1.253:8000",
+          "httpMethod" : "GET",
+	  "preserveRequestPath": true,
+	  "useAuthenticationHeader": "jwt"
+        }
+      }
+    ]
+  }
+}
