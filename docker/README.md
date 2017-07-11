@@ -4,9 +4,9 @@ This tutorial will cover the following:
 
 *	[Bootstrap](#bootstrap) - Bootstrapping the CA Mobile App Services (MAS), CA Microgateway (MGW), and CA Live API Creator (LAC) in Docker]
 *	[Creation](#creation) - How LAC can create a RESTful microservice (MS) from a relational datastore (MySQL)
+*	[Security](#security) - How the MGW enforces OAuth security and rate limiting for the MS
 *	[Discovery](#discovery) - How the MGW enables programmatic discovery through service registry (Consul) via Quickstart templates
 * 	[Consumption](#consumption) - How the MAS provides mobile application MS consumption through developer console and SDKs
-*	[Security](#security) - How the MGW enforces OAuth security and rate limiting for the MS
 
 [Bonus section](#bonus)
 
@@ -20,12 +20,12 @@ This tutorial will cover the following:
 *	[Mobile Developer Console](https://docops.ca.com/ca-mobile-developer-console/1-0/en) basic knowledge
 *	[Live API Creator](https://docops.ca.com/ca-live-api-creator/3-2/en) basic knowledge
 *	[Docker](https://www.docker.com) basic knowledge
-*	Docker environment running
 *	[Docker Compose](https://www.docker.com/products/docker-compose) basic knowledge
 *	[Consul](https://www.consul.io/) basic knowledge
 *	[Apple Xcode](https://developer.apple.com/xcode) basic knowledge
 * 	[Docker-MAS README](https://github.com/CAAPIM/Docker-MAS/blob/master/README.md)
-*	Download this [repo](https://github-isl-01.ca.com/pagch04/apim_tutorials_demos/tree/master/microservices_demo)
+*	Docker environment running
+*	Download this [repo](https://github.com/phriscage/ca_ms_demo)
 
 
 ### <a name="configuration"></a>Configuration:
