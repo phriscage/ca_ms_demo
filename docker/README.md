@@ -13,6 +13,53 @@ This tutorial will cover the following:
 *	[Token Bridge](#token_bridge) - How the MGW provides token bridging from OAuth to JWT
 *	[Token Exchange](#token_exchange) - How the MAS provides token exchange for service-to-service AuthN/AuthZ
 
+
+![alt text](https://g.gravizo.com/svg?%20digraph%20G%20{%20rankdir=LR;%20edge%20[dir=both];%20{rank=same;%20oauth,%20mgw,%20consul};%20{rank=same;%20mdc,%20mag};%20dev%20[label=%22dev%22,%20shape=box];%20client%20[label=%22client%22,%20shape=box];%20mdc%20[label=%22mdc%22];%20mag%20[label=%22mag%22];%20oauth%20[label=%22oauth%22];%20mgw%20[label=%22mgw%22];%20consul%20[label=%22consul%22];%20lac1%20[label=%22lac%22];%20lac2%20[label=%22lac%22];%20lac3%20[label=%22lac%22];%20db1%20[label=%22db%22,%20shape=box];%20db2%20[label=%22db%22,%20shape=box];%20spacing%20[label=%22%22,%20style=invisible];%20dev%20-%3E%20mdc%20[style=dotted,%20dir=none];%20mdc%20-%3E%20oauth%20[style=dotted,%20dir=none];%20client%20-%3E%20mag;%20mag%20-%3E%20oauth%20[style=dotted,%20dir=none];%20mag%20-%3E%20mgw;%20mgw%20-%3E%20oauth%20[style=dotted,%20dir=none];%20consul%20-%3E%20mgw%20[style=dotted,%20dir=none];%20mgw%20-%3E%20lac1;%20mgw%20-%3E%20lac2;%20mgw%20-%3E%20lac3;%20consul%20-%3E%20lac3%20[style=dotted,%20dir=none];%20lac1%20-%3E%20db1%20[style=dotted,%20dir=none];%20lac2%20-%3E%20db1%20[style=dotted,%20dir=none];%20lac3%20-%3E%20db1%20[style=dotted,%20dir=none];%20lac1%20-%3E%20db2%20[style=dotted,%20dir=none];%20lac2%20-%3E%20db2%20[style=dotted,%20dir=none];%20lac3%20-%3E%20db2%20[style=dotted,%20dir=none];%20})
+<details>
+  <summary>Graphviz Source</summary>
+  <pre><code>
+![alt text](https://g.gravizo.com/svg?
+  digraph G {
+    rankdir=LR;
+    edge [dir=both];
+    {rank=same; oauth, mgw, consul};
+    {rank=same; mdc, mag};
+   dev [label="dev", shape=box];
+   client [label="client", shape=box];
+  mdc [label="mdc"];
+  mag [label="mag"];
+  oauth [label="oauth"];
+  mgw [label="mgw"];
+  consul [label="consul"];
+  lac1 [label="lac"];
+  lac2 [label="lac"];
+  lac3 [label="lac"];
+   db1  [label="db", shape=box];
+   db2  [label="db", shape=box];
+ 
+   spacing [label="", style=invisible];
+   dev -> mdc [style=dotted, dir=none];
+   mdc -> oauth [style=dotted, dir=none];
+    client -> mag;
+    mag -> oauth [style=dotted, dir=none];
+    mag -> mgw;
+    mgw -> oauth [style=dotted, dir=none];
+    consul -> mgw [style=dotted, dir=none];
+    mgw -> lac1;
+    mgw -> lac2;
+    mgw -> lac3;
+    consul -> lac3 [style=dotted, dir=none];
+    lac1 -> db1 [style=dotted, dir=none];
+    lac2 -> db1 [style=dotted,  dir=none];
+    lac3 -> db1 [style=dotted,  dir=none];
+    lac1 -> db2 [style=dotted,  dir=none];
+    lac2 -> db2 [style=dotted,  dir=none];
+    lac3 -> db2 [style=dotted,  dir=none];
+  }
+  </pre></code>
+</details>
+
+
 ## <a name="prerequisites"></a>Prerequisites:
 
 *	[Mobile API Gateway](https://docops.ca.com/ca-mobile-api-gateway/4-0/en) basic knowledge
