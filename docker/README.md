@@ -142,7 +142,7 @@ The Quickstart template language provides a JSON syntax language to protect and 
       	},
 	{
 	  "RequireOauth2Token": {
-	    "scope_required": "no-id-token",
+	    "scope_required": "mas_storage",
 	    "scope_fail": "false",
 	    "onetime": "false",
 	    "given_access_token": ""
@@ -215,7 +215,7 @@ Check the service exists:
 
 Generate a OAuth access token with the scope (both scopes for **/token** and **/beers**) via curl and the OAuth 2.0 Client Credentials Grant and same as ACCESS_TOKEN environment variable. You can also generate the OAuth access token from the MAS/OTK [OAuth Manager](https://mas.docker.local:8443/oauth/v2/client) using any MAS/OTK supported grant type if you only need *oob* scope:
 
-	CLIENT_ID=54f0c455-4d80-421f-82ca-9194df24859e; CLIENT_SECRET=a0f2742f-31c7-436f-9802-b7015b8fd8e7; export ACCESS_TOKEN=`curl -s -4 -k -X POST 'Content-Type: application/x-www-form-urlencoded' --data-urlencode "client_id=$CLIENT_ID" --data-urlencode "client_secret=$CLIENT_SECRET" --data-urlencode 'grant_type=client_credentials' --data-urlencode 'scope=no-id-token oob' https://mas.docker.local:8443/auth/oauth/v2/token | python  -c "import sys, json; print json.load(sys.stdin)['access_token']"`; echo $ACCESS_TOKEN;
+	CLIENT_ID=54f0c455-4d80-421f-82ca-9194df24859e; CLIENT_SECRET=a0f2742f-31c7-436f-9802-b7015b8fd8e7; export ACCESS_TOKEN=`curl -s -4 -k -X POST 'Content-Type: application/x-www-form-urlencoded' --data-urlencode "client_id=$CLIENT_ID" --data-urlencode "client_secret=$CLIENT_SECRET" --data-urlencode 'grant_type=client_credentials' --data-urlencode 'scope=mas_storage oob' https://mas.docker.local:8443/auth/oauth/v2/token | python  -c "import sys, json; print json.load(sys.stdin)['access_token']"`; echo $ACCESS_TOKEN;
 
 Call the Token Exchange service through the MGW with an OAuth Bearer access token:
 

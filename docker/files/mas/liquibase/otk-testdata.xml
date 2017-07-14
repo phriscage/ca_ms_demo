@@ -102,7 +102,7 @@
             <column name="created_by" value="admin"/>
             <column name="client_ident" value="TestClient2.0"/>
             <column name="client_name" value="Microservices Demo Test Client"/>
-            <column name="scope" value="openid email profile phone address msso_register no-id-token oob"/>
+            <column name="scope" value="openid email profile phone address msso_register mas_storage no-id-token oob"/>
             <column name="custom" value="{}"/>
         </insert>
     </changeSet>

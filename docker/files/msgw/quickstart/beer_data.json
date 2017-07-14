@@ -9,7 +9,7 @@
       	},
 	{
 	  "RequireOauth2Token": {
-	    "scope_required": "no-id-token",
+	    "scope_required": "mas_storage",
 	    "scope_fail": "false",
 	    "onetime": "false",
 	    "given_access_token": ""
