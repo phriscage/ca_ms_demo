@@ -112,8 +112,8 @@ Once the application is ready, you should be able to login to the MAS developer 
 
 	https://msgw.docker.local:9443/quickstart/1.0/doc
 	https://mas.docker.local
-	https://lac.docker.local
-	https://consul.docker.local:8500
+	http://lac.docker.local
+	http://consul.docker.local:8500
 
 ## <a name="demo examples"></a>Demo examples:
 

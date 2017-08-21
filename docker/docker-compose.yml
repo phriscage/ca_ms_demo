@@ -86,6 +86,7 @@ services:
       - MAS_HOSTNAME   
       - MDC_HOSTNAME    
       - OTK_HOSTNAME
+      - SSG_LICENSE
       - SSG_SSL_KEY=${MAS_SSL_KEY_B64}
       - SSG_SSL_KEY_PASS=${MAS_SSL_KEY_PASS}
       - BUNDLE_TEMPLATE_HOSTNAME   
