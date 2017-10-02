@@ -105,7 +105,7 @@ Authorization: ${request.http.header.authorization}]]&gt;&lt;/L7p:Detail&gt;
             &lt;L7p:HttpStatus stringValue="${status}"/&gt;
         &lt;/L7p:CustomizeErrorResponse&gt;
         &lt;L7p:SetVariable&gt;
-            &lt;L7p:Base64Expression stringValue="aHR0cHM6Ly9tc2d3Ojg0NDMke3JlcXVlc3QudXJsLnBhdGh9JHtyZXF1ZXN0LnVybC5xdWVyeX0="/&gt;
+            &lt;L7p:Base64Expression stringValue="aHR0cHM6Ly9tZ3c6ODQ0MyR7cmVxdWVzdC51cmwucGF0aH0ke3JlcXVlc3QudXJsLnF1ZXJ5fQ=="/&gt;
             &lt;L7p:VariableToSet stringValue="targetUrl"/&gt;
         &lt;/L7p:SetVariable&gt;
         &lt;L7p:SetVariable&gt;

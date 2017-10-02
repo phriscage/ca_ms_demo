@@ -52,7 +52,6 @@ services:
       - mysql-data:/var/lib/mysql
       - ${PWD}/files/mysql/scripts/startup/:/docker-entrypoint-initdb.d/
       - ${PWD}/files/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
-    restart: always
     deploy:
       resources:
         limits:

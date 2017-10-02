@@ -21,7 +21,7 @@ export LAC_DEFAULT_LICENSE_FILE=/usr/local/tomcat/bin/EvalLicense_exp20171007.tx
 cd /usr/local/tomcat/bin
 
 sleep 5
-#./import_data.sh 2>&1 &
+./import_data.sh 2>&1 &
 
 if [ ! -z "$RDS_HOSTNAME" ] && [ ! -z "$RDS_PORT" ]
 then
