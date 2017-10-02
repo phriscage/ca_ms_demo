@@ -1,15 +1,15 @@
 #!/bin/sh
 ## Try to load an API via curl
 
-[ -z "$MSGW_SSL_PUBLIC_CERT_B64" ] && echo "Need to set MSGW_SSL_PUBLIC_CERT_B64" && exit 1;
+[ -z "$MGW_SSL_PUBLIC_CERT_B64" ] && echo "Need to set MGW_SSL_PUBLIC_CERT_B64" && exit 1;
 
 hostname="localhost"
 port=8443
 username="admin"
 password="password"
 fip_name="Gateway as a Client Identity Provider"
-msgw_fqdn="msgw.docker.local"
-msgw_cert="$(echo $MSGW_SSL_PUBLIC_CERT_B64)"
+MGW_fqdn="mgw.docker.local"
+MGW_cert="$(echo $MGW_SSL_PUBLIC_CERT_B64)"
 #ABSOLUTE_PATH="$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)"
 #current_dir="$(pwd -P)"
 add_cmd="/opt/docker/rc.d/after-start/add-otk-user.sh"
@@ -51,10 +51,10 @@ esac
 shift # past argument or value
 done
 
-import_cmd="$add_cmd $hostname:$port \"$username\" \"$password\" \"$fip_name\" \"$msgw_fqdn\" $msgw_cert"
+import_cmd="$add_cmd $hostname:$port \"$username\" \"$password\" \"$fip_name\" \"$MGW_fqdn\" $MGW_cert"
 
-#	source .custom.env; ./files/mas/provision/add-otk-user.sh localhost:8443 "admin" 'password' "Gateway as a Client Identity Provider" "msgw.docker.local" `echo $MSGW_SSL_PUBLIC_CERT_B64`
-#	$add_cmd $hostname:$port "$username" "$password" "$fip_name" "$msgw_fqdn" "$msgw_cert"
+#	source .custom.env; ./files/mas/provision/add-otk-user.sh localhost:8443 "admin" 'password' "Gateway as a Client Identity Provider" "mgw.docker.local" `echo $MGW_SSL_PUBLIC_CERT_B64`
+#	$add_cmd $hostname:$port "$username" "$password" "$fip_name" "$MGW_fqdn" "$MGW_cert"
 ## capture api_key and post data
 import_user()
 {

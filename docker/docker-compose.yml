@@ -2,7 +2,7 @@
 ##
 ##  Purpose: Define a miroservice for retrieving beer data from two separate
 ##    databases. Define a microservice for validting a JWT and exchanging tokens
-##    Protect both MS with a MSGW and leverage MAS as the OAuth hub.
+##    Protect both MS with a mgw and leverage MAS as the OAuth hub.
 ##
 ##  Email: christopher.page@ca.com
 ##
@@ -11,7 +11,7 @@ version: '3'
 services:
   consul:
     command: "agent -server -ui -bootstrap -client 0.0.0.0"
-    image: consul:0.8.5
+    image: consul:0.9.3
     environment:
       - CONSUL_BIND_INTERFACE=eth0
       - SERVICE_IGNORE=yes
@@ -58,7 +58,7 @@ services:
         limits:
           memory: 256m
   mas:
-    image: caapimcollab/mobile-app-services:4.0.00-CR01
+    image: caapimcollab/mobile-app-services:4.0.02-beta
     ports:
       - "8080:8080"
       - ${MAS_PORT}:8443
@@ -68,15 +68,11 @@ services:
       - /opt/docker/rc.d/bootstrap/restman
       - /opt/docker/rc.d/bootstrap/policyman
       - ${PWD}/files/mas/liquibase/otk-testdata.xml:/db/liquibase/otk-testdata.xml
-      - ${PWD}/files/mas/liquibase/mag-otk-testdata.xml:/db/liquibase/mag-otk-testdata.xml
-      - ${PWD}/files/mas/liquibase/mag-testdata.xml:/db/liquibase/mag-testdata.xml
       - ${PWD}/files/mas/liquibase/mas-identity-testdata.xml:/db/liquibase/mas-identity-testdata.xml
       - ${PWD}/files/mas/bundles/proxy_folder.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/proxy_folder.bundle
+      ## add the OTK federated user x509 for MGW bootstrap
       - ${PWD}/files/mas/provision/add-otk-user.sh:/opt/docker/rc.d/after-start/add-otk-user.sh:rw
       - ${PWD}/files/mas/provision/x-add-otk-user.sh:/opt/docker/rc.d/after-start/x-add-otk-user.sh:rw
-      # these are in MAS until MSGW quickstart load is added
-      - ${PWD}/files/msgw/provision/x-add-quickstart-templates.sh:/opt/docker/rc.d/after-start/x-add-quickstart-templates.sh:rw
-      - ${PWD}/files/msgw/quickstart/beer_data.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/quickstart/beer_data.json
     env_file:
       - ${PWD}/.env
     # override the env_file defaults with shell environment variables
@@ -86,36 +82,82 @@ services:
       - MAS_HOSTNAME   
       - MDC_HOSTNAME    
       - OTK_HOSTNAME
-      - SSG_LICENSE
+      #- SSG_LICENSE
       - SSG_SSL_KEY=${MAS_SSL_KEY_B64}
       - SSG_SSL_KEY_PASS=${MAS_SSL_KEY_PASS}
-      - BUNDLE_TEMPLATE_HOSTNAME   
-      - BUNDLE_TEMPLATE_OTK_HOSTNAME    
-      - BUNDLE_TEMPLATE_DEV_CONSOLE_CALLBACK    
+      - MGW_SSL_PUBLIC_CERT_B64
+      # Default settings
+      - SSG_CLUSTER_PASSWORD
+      - SSG_DATABASE_TYPE
+      - SSG_DATABASE_DERBY_IN_MEMORY
+      - SSG_JVM_HEAP
+      - BUNDLE_TEMPLATE_HOSTNAME
+      - BUNDLE_TEMPLATE_OTK_HOSTNAME
       - BUNDLE_TEMPLATE_HOSTNAME_ENCODED
       - BUNDLE_TEMPLATE_PROTOCOL_HOSTNAME_ENCODED
+      - BUNDLE_TEMPLATE_OTK_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_NAME
+      - BUNDLE_TEMPLATE_OTK_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_OTK_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_MAG_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_NAME
+      - BUNDLE_TEMPLATE_MAG_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_MAG_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_NAME
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_NAME
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_MESSAGING_BROKER_HOST
+      - BUNDLE_TEMPLATE_MESSAGING_BROKER_PORT
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_NAME
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_CALLBACK
+      - ADD_TEST_USERS_GROUPS
       - ADD_TEST_CLIENTS=true
-      - MSGW_SSL_PUBLIC_CERT_B64
+      - ACCEPT_LICENSE=true
     deploy:
       placement:
         constraints:
           - node.role == manager
-  msgw:
-    image: caapimcollab/microgateway:beta1
+  mgw:
+    image: caapim/microgateway:1.0.00
     ports:
       - "9443:9443"
     volumes:
-      - ${PWD}/files/msgw/bundles/token_exchange.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/token_exchange.bundle
-      - ${PWD}/files/msgw/bundles/RouteHttp.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/RouteHttp.bundle
-      - ${PWD}/files/msgw/bundles/consul.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/consul.bundle
+      - ${PWD}/files/mgw/quickstart/beer_data.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/beer_data.json
+      - ${PWD}/files/mgw/bundles/token_exchange.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/token_exchange.bundle
+      # - ${PWD}/files/mgw/bundles/RouteHttp.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/RouteHttp.bundle
+      - ${PWD}/files/mgw/bundles/consul.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/consul.bundle
     environment:
       - SERVICE_IGNORE=yes
       - SSG_ADMIN_USERNAME=admin
       - SSG_ADMIN_PASSWORD=password
-      - SSG_SSL_KEY=${MSGW_SSL_KEY_B64}
-      - SSG_SSL_KEY_PASS=${MSGW_SSL_KEY_PASS}
-      - MSGW_SSL_PUBLIC_CERT_B64=${MSGW_SSL_PUBLIC_CERT_B64}
-      - SSG_LICENSE
+      - SSG_SSL_KEY=${MGW_SSL_KEY_B64}
+      - SSG_SSL_KEY_PASS=${MGW_SSL_KEY_PASS}
+      - MGW_SSL_PUBLIC_CERT_B64=${MGW_SSL_PUBLIC_CERT_B64}
+      - ACCEPT_LICENSE=true
+      - SSG_LICENSE=${MGW_LICENSE}
       - SSG_INTERNAL_SERVICES=restman
 
       - SCALER_ENABLE=false

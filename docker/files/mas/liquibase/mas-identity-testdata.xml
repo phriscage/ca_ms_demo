@@ -189,13 +189,6 @@
             <column name="enabled" valueNumeric="1"/>
         </insert>
         <insert tableName="internal_user_group">
-            <column name="goid" valueComputed="X'33a0046a6fa211e6a9047fbe67c789f4'"/>
-            <column name="version" valueNumeric="1"/>
-            <column name="internal_group" valueComputed="X'15f9a5146f0811e695180fea8fd6de61'"/>
-            <column name="provider_goid" valueComputed="X'0000000000000000FFFFFFFFFFFFFFFE'"/>
-            <column name="user_goid" valueComputed="X'150bb5f26f0811e691075b57b9f5bdc0'"/>
-        </insert>
-        <insert tableName="internal_user_group">
             <column name="goid" valueComputed="X'33a0046a6fa211e6a9047fbe67c789f3'"/>
             <column name="version" valueNumeric="1"/>
             <column name="internal_group" valueComputed="X'15f9a5146f0811e695180fea8fd6de61'"/>
@@ -257,13 +250,6 @@
             <column name="internal_group" valueComputed="X'c6c209f66fbf11e6976e1bb1e186314d'"/>
             <column name="provider_goid" valueComputed="X'0000000000000000FFFFFFFFFFFFFFFE'"/>
             <column name="user_goid" valueComputed="X'968e823c6fbf11e6ac12e3f0f6be184f'"/>
-        </insert>
-        <insert tableName="internal_user_group">
-            <column name="goid" valueComputed="X'f9c5cfca6fc111e698d5ab9013522d5e'"/>
-            <column name="version" valueNumeric="1"/>
-            <column name="internal_group" valueComputed="X'ca1c2bd66fbf11e6be82270d1254c63c'"/>
-            <column name="provider_goid" valueComputed="X'0000000000000000FFFFFFFFFFFFFFFE'"/>
-            <column name="user_goid" valueComputed="X'150bb5f26f0811e691075b57b9f5bdc0'"/>
         </insert>
         <insert tableName="internal_user_group">
             <column name="goid" valueComputed="X'f9c5cfca6fc111e698d5ab9013522d5d'"/>

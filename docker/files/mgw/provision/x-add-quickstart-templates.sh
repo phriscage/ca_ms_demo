@@ -1,7 +1,7 @@
 #!/bin/sh
 ## Try to load a Quickstart payloads via curl
 
-hostname="msgw"
+hostname="mgw"
 port=8443
 username="admin"
 password="password"
@@ -48,7 +48,7 @@ done
 check_url="http://${hostname}:${port}/${resource}"
 check_cmd="curl -s -w %{http_code} '${check_url}' -o /dev/null"
 
-## curl -k -4 -i -u 'admin:password' https://msgw.docker.local:9443/quickstart/1.0/services --data @files/msgw/quickstart/token_exchange.json
+## curl -k -4 -i -u 'admin:password' https://mgw.docker.local:9443/quickstart/1.0/services --data @files/mgw/quickstart/token_exchange.json
 import_api()
 {
 	local file_name=$1
