@@ -141,7 +141,8 @@ services:
         constraints:
           - node.role == manager
   mgw:
-    image: caapim/microgateway:1.0.00
+    image: caapimcollab/microgateway:beta2
+    # image: caapim/microgateway:1.0.00
     ports:
       - "9443:9443"
     volumes:
@@ -157,7 +158,8 @@ services:
       - SSG_SSL_KEY_PASS=${MGW_SSL_KEY_PASS}
       - MGW_SSL_PUBLIC_CERT_B64=${MGW_SSL_PUBLIC_CERT_B64}
       - ACCEPT_LICENSE=true
-      - SSG_LICENSE=${MGW_LICENSE}
+      #- SSG_LICENSE=${MGW_LICENSE}
+      - SSG_LICENSE
       - SSG_INTERNAL_SERVICES=restman
 
       - SCALER_ENABLE=false

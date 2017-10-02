@@ -23,8 +23,8 @@ services:
       - ca_accept_license=enu
     volumes:
       #- ${PWD}/files/lac/BeerDataComments.json:/usr/local/tomcat/bin/BeerData.json
-      #- ${PWD}/files/lac/BeerData.json:/usr/local/tomcat/bin/BeerData.json
-      #- ${PWD}/files/lac/import_data.sh:/usr/local/tomcat/bin/import_data.sh
+      - ${PWD}/files/lac/BeerData.json:/usr/local/tomcat/bin/BeerData.json
+      - ${PWD}/files/lac/import_data.sh:/usr/local/tomcat/bin/import_data.sh
       - ${PWD}/files/lac/StartLiveAPICreator.sh:/usr/local/tomcat/bin/StartLiveAPICreator.sh
     deploy:
       placement:
