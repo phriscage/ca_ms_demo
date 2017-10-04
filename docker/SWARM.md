@@ -23,15 +23,23 @@ In this tutorial we will extend the Microservices Demo (MSD) configuration and s
 
 Docker Swarm involves nodes, services, and tasks. A node is an Docker host that is running the Docker daemon andpart of a group of nodes or swarm. A service is the definition of tasks that will be execute on nodes in the swarm. The services are the application context that is definedin your Dcoker Compose. Docker Stack provides a command to deploy services from your [docker-compose.yml](docker-compose.yml) to a swarm. Docker stack does not source environment variables from [.env](.env) like Docker Compose. You will need to source them first, then [.custom.env](.custom.env), then *docker stack deploy* to get the services started.
 
-Docker Swarm for MAC has some issues with the overlay networking and multiple nodes are not supported, [issue](https://github.com/docker/for-mac/issues/67). You can setup a single-node Docker Swarm cluster with the MAC, but for now, we will use Docker Machine to provision a boot2docker image. in Virtual Box or other IaaS providers so below is how to get VirtualBox setup.
+Docker Swarm for MAC has some issues with the overlay networking and multiple nodes are not supported, [issue](https://github.com/docker/for-mac/issues/67). You can setup a single-node Docker Swarm cluster with the MAC, but for now, we will use Docker Machine to provision a boot2docker image. in Virtual Box or other IaaS providers so below is how to get VirtualBox setup. _--virtualbox-host-dns-resolver=true_ is required if not using Docker DNS for MAS HOSTNAME environment variables or localhost 
 
 Virtual Box deployment:
 
 Create boot2docker image:
 
-	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true master.e2e.caw
+	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true master.e2e.caworld.local
 
-Confgiure port forwarding:
+Stop machine:
+
+	docker-machine stop master.e2e.caworld.local
+
+Configure bridge port:
+
+Open VBox VM settings, add Bridge port: select interface (Wifi, etc.), promiscious: allow-all, enable cable attached. This can be accomplished with VBoxManage but I don't know the commands yet...
+
+__Confgiure port forwarding:__ # not needed if bridge port enabled
 
 Open VBox VM settings, and select the NAT interface. Add Port forwarding for the following Swarm ports. This can be accomplished with VBoxManage but I don't know the commands yet...
 
@@ -40,15 +48,19 @@ Open VBox VM settings, and select the NAT interface. Add Port forwarding for the
 	Swarm 7946 TCP, TCP, 0.0.0.0, 7946, , 7946
 	Swarm 7946 UDP, UDP, 0.0.0.0, 7946, , 7946
 
+Start machine:
+
+	docker-machine start master.e2e.caworld.local
+
 Set environment:
 
-	eval $(docker-machine env master.e2e.caw)
+	eval $(docker-machine env master.e2e.caworld.local)
 
 Initialize the Swarm:
 
-We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same wifi network as en0 so the _--advertise-addr_ is `ifconfig en0 | grep "inet " | awk '{print $2}'`. If the VB has multiple interfaces defined, you need to also specify the _--listen-addr_. on the host-only interface. Typically this is *eth0*:
+We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh master.e2e.caworld.local ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
 
-	docker swarm init --listen-addr=eth0 --advertise-addr=`ifconfig en0 | grep "inet " | awk '{print $2}'`
+	docker swarm init --advertise-addr=eth1
 
 
 ### <a name="bootstrap"></a>Bootstrap:

@@ -16,7 +16,7 @@ services:
       - CONSUL_BIND_INTERFACE=eth0
       - SERVICE_IGNORE=yes
     ports:
-      - "8500:8500"
+      - 8500:8500
   registrator:
     command: "-internal -retry-attempts -1 consul://consul.:8500"
     image: gliderlabs/registrator:master
@@ -59,9 +59,8 @@ services:
   mas:
     image: caapimcollab/mobile-app-services:4.0.02-beta
     ports:
-      - "8080:8080"
       - ${MAS_PORT}:8443
-      - "8883:8883"
+      - 8883:8883
     hostname: ${MAS_HOSTNAME}
     volumes:
       - /opt/docker/rc.d/bootstrap/restman
@@ -143,7 +142,7 @@ services:
     image: caapimcollab/microgateway:beta2
     # image: caapim/microgateway:1.0.00
     ports:
-      - "9443:9443"
+      - 9443:9443
     volumes:
       - ${PWD}/files/mgw/quickstart/beer_data.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/beer_data.json
       - ${PWD}/files/mgw/bundles/token_exchange.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/token_exchange.bundle
