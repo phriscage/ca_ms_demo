@@ -5,7 +5,7 @@
             <l7:Name>proxy</l7:Name>
             <l7:Id>c2dd871c34d73387a0aeca49d89d8ca9</l7:Id>
             <l7:Type>FOLDER</l7:Type>
-            <l7:TimeStamp>2017-07-10T19:03:34.203Z</l7:TimeStamp>
+            <l7:TimeStamp>2017-10-04T18:56:20.838Z</l7:TimeStamp>
             <l7:Resource>
                 <l7:Folder folderId="0000000000000000ffffffffffffec76" id="c2dd871c34d73387a0aeca49d89d8ca9" version="0">
                     <l7:Name>proxy</l7:Name>
@@ -16,7 +16,7 @@
             <l7:Name>SSL</l7:Name>
             <l7:Id>00000000000000000000000000000002:SSL</l7:Id>
             <l7:Type>SSG_KEY_ENTRY</l7:Type>
-            <l7:TimeStamp>2017-07-10T19:03:34.475Z</l7:TimeStamp>
+            <l7:TimeStamp>2017-10-04T18:56:21.105Z</l7:TimeStamp>
             <l7:Resource>
                 <l7:PrivateKey alias="SSL" id="00000000000000000000000000000002:SSL" keystoreId="00000000000000000000000000000002">
                     <l7:CertificateChain>
@@ -32,7 +32,7 @@
                             <l7:StringValue>RSA</l7:StringValue>
                         </l7:Property>
                         <l7:Property key="keyData">
-                            <l7:StringValue algorithm="RSA" bundleKey="$L7C2$1bead,PBIZyPPkv5LYOWn4rpSiCiSPjCq+F2J0bkSJItKIrQQ=$IFrZckQdaugkhQO8I1iGqv2M/L0XXBGHMa9CqB2MD/IHYPmJx85kpsYPX4RjlXJQlheGCT5vT6UtwDAmWSTILeELFAH7YjMYaGkGKk8nHXKNv0ssYn3wUCBHA4J6qZHZ">$L7C2$1,xXPyKnoBbe0MEZWGMDOcduO5fzzpf/amTB6EqzOXHPg=$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</l7:StringValue>
+                            <l7:StringValue algorithm="RSA" bundleKey="$L7C2$1bead,E+kWAHfa2UGDAFw+uflnax6VGGaRuU0V+G1G0kpQm4I=$m4qu3OJ68GqE+rv/EP1vP5f3pvZoIvTKl+L84HR1RTZSvw1nfKgY1T3kPefsLH68j5ZA4DEt8MSzRTT5VCC1hbu7ltj0emhjY1pnZ5lryGE2Nh0JHXj2zjaAkFcntAXt">$L7C2$1,O/eWVSa/LV0hDApln/JsmyERK1QNihUcLfXNeL8Zero=$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</l7:StringValue>
                         </l7:Property>
                         <l7:Property key="specialPurposes">
                             <l7:StringValue>Default SSL Key</l7:StringValue>
@@ -45,10 +45,10 @@
             <l7:Name>Proxy</l7:Name>
             <l7:Id>c2dd871c34d73387a0aeca49d89d8ce9</l7:Id>
             <l7:Type>SERVICE</l7:Type>
-            <l7:TimeStamp>2017-07-10T19:03:34.551Z</l7:TimeStamp>
+            <l7:TimeStamp>2017-10-04T18:56:21.159Z</l7:TimeStamp>
             <l7:Resource>
-                <l7:Service id="c2dd871c34d73387a0aeca49d89d8ce9" version="2">
-                    <l7:ServiceDetail folderId="c2dd871c34d73387a0aeca49d89d8ca9" id="c2dd871c34d73387a0aeca49d89d8ce9" version="2">
+                <l7:Service id="c2dd871c34d73387a0aeca49d89d8ce9" version="6">
+                    <l7:ServiceDetail folderId="c2dd871c34d73387a0aeca49d89d8ca9" id="c2dd871c34d73387a0aeca49d89d8ce9" version="6">
                         <l7:Name>Proxy</l7:Name>
                         <l7:Enabled>true</l7:Enabled>
                         <l7:ServiceMappings>
@@ -71,7 +71,7 @@
                                 <l7:BooleanValue>false</l7:BooleanValue>
                             </l7:Property>
                             <l7:Property key="policyRevision">
-                                <l7:LongValue>3</l7:LongValue>
+                                <l7:LongValue>19</l7:LongValue>
                             </l7:Property>
                             <l7:Property key="soap">
                                 <l7:BooleanValue>false</l7:BooleanValue>
@@ -86,7 +86,7 @@
                     </l7:ServiceDetail>
                     <l7:Resources>
                         <l7:ResourceSet tag="policy">
-                            <l7:Resource type="policy" version="2">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+                            <l7:Resource type="policy" version="18">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy"&gt;
     &lt;wsp:All wsp:Usage="Required"&gt;
         &lt;L7p:AuditDetailAssertion&gt;
@@ -198,6 +198,175 @@ Authorization: ${request.http.header.authorization}]]&gt;&lt;/L7p:Detail&gt;
                 &lt;L7p:RaiseError/&gt;
             &lt;/wsp:All&gt;
         &lt;/wsp:OneOrMore&gt;
+        &lt;wsp:OneOrMore wsp:Usage="Required"&gt;
+            &lt;wsp:All wsp:Usage="Required"&gt;
+                &lt;L7p:ComparisonAssertion&gt;
+                    &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                    &lt;L7p:Expression1 stringValue="${request.http.parameter.blinkt}"/&gt;
+                    &lt;L7p:Expression2 stringValue="true"/&gt;
+                    &lt;L7p:Predicates predicates="included"&gt;
+                        &lt;L7p:item binary="included"&gt;
+                            &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                            &lt;L7p:RightValue stringValue="true"/&gt;
+                        &lt;/L7p:item&gt;
+                    &lt;/L7p:Predicates&gt;
+                &lt;/L7p:ComparisonAssertion&gt;
+                &lt;L7p:SetVariable&gt;
+                    &lt;L7p:Base64Expression stringValue="MTAw"/&gt;
+                    &lt;L7p:DataType variableDataType="int"/&gt;
+                    &lt;L7p:VariableToSet stringValue="delay"/&gt;
+                &lt;/L7p:SetVariable&gt;
+                &lt;wsp:OneOrMore wsp:Usage="Required"&gt;
+                    &lt;wsp:All wsp:Usage="Required"&gt;
+                        &lt;L7p:Regex&gt;
+                            &lt;L7p:AutoTarget booleanValue="false"/&gt;
+                            &lt;L7p:Enabled booleanValue="false"/&gt;
+                            &lt;L7p:IncludeEntireExpressionCapture booleanValue="false"/&gt;
+                            &lt;L7p:OtherTargetMessageVariable stringValue="response.http.status"/&gt;
+                            &lt;L7p:Regex stringValue="^50"/&gt;
+                            &lt;L7p:RegexName stringValue="500 errors"/&gt;
+                            &lt;L7p:Replacement stringValue=""/&gt;
+                            &lt;L7p:Target target="OTHER"/&gt;
+                        &lt;/L7p:Regex&gt;
+                        &lt;L7p:ComparisonAssertion&gt;
+                            &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                            &lt;L7p:Expression1 stringValue="${response.http.status}"/&gt;
+                            &lt;L7p:Expression2 stringValue="50"/&gt;
+                            &lt;L7p:Operator operator="CONTAINS"/&gt;
+                            &lt;L7p:Predicates predicates="included"&gt;
+                                &lt;L7p:item binary="included"&gt;
+                                    &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                                    &lt;L7p:Operator operator="CONTAINS"/&gt;
+                                    &lt;L7p:RightValue stringValue="50"/&gt;
+                                &lt;/L7p:item&gt;
+                            &lt;/L7p:Predicates&gt;
+                        &lt;/L7p:ComparisonAssertion&gt;
+                        &lt;L7p:SetVariable&gt;
+                            &lt;L7p:Base64Expression stringValue="cmVk"/&gt;
+                            &lt;L7p:VariableToSet stringValue="color"/&gt;
+                        &lt;/L7p:SetVariable&gt;
+                        &lt;L7p:assertionComment&gt;
+                            &lt;L7p:Properties mapValue="included"&gt;
+                                &lt;L7p:entry&gt;
+                                    &lt;L7p:key stringValue="LEFT.COMMENT"/&gt;
+                                    &lt;L7p:value stringValue="500"/&gt;
+                                &lt;/L7p:entry&gt;
+                            &lt;/L7p:Properties&gt;
+                        &lt;/L7p:assertionComment&gt;
+                    &lt;/wsp:All&gt;
+                    &lt;wsp:All wsp:Usage="Required"&gt;
+                        &lt;L7p:ComparisonAssertion&gt;
+                            &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                            &lt;L7p:Expression1 stringValue="${response.http.status}"/&gt;
+                            &lt;L7p:Expression2 stringValue="40"/&gt;
+                            &lt;L7p:Operator operator="CONTAINS"/&gt;
+                            &lt;L7p:Predicates predicates="included"&gt;
+                                &lt;L7p:item binary="included"&gt;
+                                    &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                                    &lt;L7p:Operator operator="CONTAINS"/&gt;
+                                    &lt;L7p:RightValue stringValue="40"/&gt;
+                                &lt;/L7p:item&gt;
+                            &lt;/L7p:Predicates&gt;
+                        &lt;/L7p:ComparisonAssertion&gt;
+                        &lt;L7p:SetVariable&gt;
+                            &lt;L7p:Base64Expression stringValue="b3Jhbmdl"/&gt;
+                            &lt;L7p:VariableToSet stringValue="color"/&gt;
+                        &lt;/L7p:SetVariable&gt;
+                        &lt;L7p:assertionComment&gt;
+                            &lt;L7p:Properties mapValue="included"&gt;
+                                &lt;L7p:entry&gt;
+                                    &lt;L7p:key stringValue="LEFT.COMMENT"/&gt;
+                                    &lt;L7p:value stringValue="400"/&gt;
+                                &lt;/L7p:entry&gt;
+                            &lt;/L7p:Properties&gt;
+                        &lt;/L7p:assertionComment&gt;
+                    &lt;/wsp:All&gt;
+                    &lt;wsp:All wsp:Usage="Required"&gt;
+                        &lt;L7p:ComparisonAssertion&gt;
+                            &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                            &lt;L7p:Expression1 stringValue="${response.http.status}"/&gt;
+                            &lt;L7p:Expression2 stringValue="201"/&gt;
+                            &lt;L7p:Operator operator="CONTAINS"/&gt;
+                            &lt;L7p:Predicates predicates="included"&gt;
+                                &lt;L7p:item binary="included"&gt;
+                                    &lt;L7p:CaseSensitive booleanValue="false"/&gt;
+                                    &lt;L7p:Operator operator="CONTAINS"/&gt;
+                                    &lt;L7p:RightValue stringValue="201"/&gt;
+                                &lt;/L7p:item&gt;
+                            &lt;/L7p:Predicates&gt;
+                        &lt;/L7p:ComparisonAssertion&gt;
+                        &lt;L7p:SetVariable&gt;
+                            &lt;L7p:Base64Expression stringValue="Ymx1ZQ=="/&gt;
+                            &lt;L7p:VariableToSet stringValue="color"/&gt;
+                        &lt;/L7p:SetVariable&gt;
+                        &lt;L7p:assertionComment&gt;
+                            &lt;L7p:Properties mapValue="included"&gt;
+                                &lt;L7p:entry&gt;
+                                    &lt;L7p:key stringValue="LEFT.COMMENT"/&gt;
+                                    &lt;L7p:value stringValue="201"/&gt;
+                                &lt;/L7p:entry&gt;
+                            &lt;/L7p:Properties&gt;
+                        &lt;/L7p:assertionComment&gt;
+                    &lt;/wsp:All&gt;
+                    &lt;L7p:SetVariable&gt;
+                        &lt;L7p:Base64Expression stringValue="Z3JlZW4="/&gt;
+                        &lt;L7p:VariableToSet stringValue="color"/&gt;
+                    &lt;/L7p:SetVariable&gt;
+                &lt;/wsp:OneOrMore&gt;
+                &lt;L7p:SetVariable&gt;
+                    &lt;L7p:Base64Expression stringValue="aHR0cDovL2JsaW5rdDo4MDgwL2JsaW5rdHMvcmFuZG9tP2NvbG9yPSR7Y29sb3J9JmRlbGF5PSR7ZGVsYXl9"/&gt;
+                    &lt;L7p:VariableToSet stringValue="blinkt_url"/&gt;
+                &lt;/L7p:SetVariable&gt;
+                &lt;L7p:HttpRoutingAssertion&gt;
+                    &lt;L7p:FailOnErrorStatus booleanValue="false"/&gt;
+                    &lt;L7p:HttpMethod httpMethod="POST"/&gt;
+                    &lt;L7p:ProtectedServiceUrl stringValue="${blinkt_url}"/&gt;
+                    &lt;L7p:ProxyPassword stringValueNull="null"/&gt;
+                    &lt;L7p:ProxyUsername stringValueNull="null"/&gt;
+                    &lt;L7p:RequestHeaderRules httpPassthroughRuleSet="included"&gt;
+                        &lt;L7p:Rules httpPassthroughRules="included"&gt;
+                            &lt;L7p:item httpPassthroughRule="included"&gt;
+                                &lt;L7p:Name stringValue="Authorization"/&gt;
+                            &lt;/L7p:item&gt;
+                        &lt;/L7p:Rules&gt;
+                    &lt;/L7p:RequestHeaderRules&gt;
+                    &lt;L7p:RequestParamRules httpPassthroughRuleSet="included"&gt;
+                        &lt;L7p:ForwardAll booleanValue="true"/&gt;
+                        &lt;L7p:Rules httpPassthroughRules="included"/&gt;
+                    &lt;/L7p:RequestParamRules&gt;
+                    &lt;L7p:ResponseHeaderRules httpPassthroughRuleSet="included"&gt;
+                        &lt;L7p:ForwardAll booleanValue="true"/&gt;
+                        &lt;L7p:Rules httpPassthroughRules="included"&gt;
+                            &lt;L7p:item httpPassthroughRule="included"&gt;
+                                &lt;L7p:Name stringValue="Set-Cookie"/&gt;
+                            &lt;/L7p:item&gt;
+                        &lt;/L7p:Rules&gt;
+                    &lt;/L7p:ResponseHeaderRules&gt;
+                    &lt;L7p:ResponseMsgDest stringValue="blinktResponse"/&gt;
+                &lt;/L7p:HttpRoutingAssertion&gt;
+                &lt;L7p:AuditDetailAssertion&gt;
+                    &lt;L7p:Detail stringValue="${blinktResponse.mainpart}"/&gt;
+                    &lt;L7p:LoggingOnly booleanValue="true"/&gt;
+                &lt;/L7p:AuditDetailAssertion&gt;
+                &lt;L7p:assertionComment&gt;
+                    &lt;L7p:Properties mapValue="included"&gt;
+                        &lt;L7p:entry&gt;
+                            &lt;L7p:key stringValue="LEFT.COMMENT"/&gt;
+                            &lt;L7p:value stringValue="Blinkt Integration"/&gt;
+                        &lt;/L7p:entry&gt;
+                    &lt;/L7p:Properties&gt;
+                &lt;/L7p:assertionComment&gt;
+            &lt;/wsp:All&gt;
+            &lt;L7p:TrueAssertion/&gt;
+            &lt;L7p:assertionComment&gt;
+                &lt;L7p:Properties mapValue="included"&gt;
+                    &lt;L7p:entry&gt;
+                        &lt;L7p:key stringValue="LEFT.COMMENT"/&gt;
+                        &lt;L7p:value stringValue="Blinkt"/&gt;
+                    &lt;/L7p:entry&gt;
+                &lt;/L7p:Properties&gt;
+            &lt;/L7p:assertionComment&gt;
+        &lt;/wsp:OneOrMore&gt;
     &lt;/wsp:All&gt;
 &lt;/wsp:Policy&gt;
 </l7:Resource>
@@ -208,15 +377,15 @@ Authorization: ${request.http.header.authorization}]]&gt;&lt;/L7p:Detail&gt;
         </l7:Item>
     </l7:References>
     <l7:Mappings>
-        <l7:Mapping action="NewOrExisting" srcId="0000000000000000ffffffffffffec76" srcUri="https://mas.docker.local:8443/restman/1.0/folders/0000000000000000ffffffffffffec76" type="FOLDER">
+        <l7:Mapping action="NewOrExisting" srcId="0000000000000000ffffffffffffec76" srcUri="https://10.255.0.8:8443/restman/1.0/folders/0000000000000000ffffffffffffec76" type="FOLDER">
             <l7:Properties>
                 <l7:Property key="FailOnNew">
                     <l7:BooleanValue>true</l7:BooleanValue>
                 </l7:Property>
             </l7:Properties>
         </l7:Mapping>
-        <l7:Mapping action="NewOrExisting" srcId="c2dd871c34d73387a0aeca49d89d8ca9" srcUri="https://mas.docker.local:8443/restman/1.0/folders/c2dd871c34d73387a0aeca49d89d8ca9" type="FOLDER"/>
-        <l7:Mapping action="NewOrExisting" srcId="00000000000000000000000000000002:SSL" srcUri="https://mas.docker.local:8443/restman/1.0/privateKeys/00000000000000000000000000000002:SSL" type="SSG_KEY_ENTRY"/>
-        <l7:Mapping action="NewOrExisting" srcId="c2dd871c34d73387a0aeca49d89d8ce9" srcUri="https://mas.docker.local:8443/restman/1.0/services/c2dd871c34d73387a0aeca49d89d8ce9" type="SERVICE"/>
+        <l7:Mapping action="NewOrExisting" srcId="c2dd871c34d73387a0aeca49d89d8ca9" srcUri="https://10.255.0.8:8443/restman/1.0/folders/c2dd871c34d73387a0aeca49d89d8ca9" type="FOLDER"/>
+        <l7:Mapping action="NewOrExisting" srcId="00000000000000000000000000000002:SSL" srcUri="https://10.255.0.8:8443/restman/1.0/privateKeys/00000000000000000000000000000002:SSL" type="SSG_KEY_ENTRY"/>
+        <l7:Mapping action="NewOrExisting" srcId="c2dd871c34d73387a0aeca49d89d8ce9" srcUri="https://10.255.0.8:8443/restman/1.0/services/c2dd871c34d73387a0aeca49d89d8ce9" type="SERVICE"/>
     </l7:Mappings>
 </l7:Bundle>
