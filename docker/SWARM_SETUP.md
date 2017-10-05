@@ -1,22 +1,22 @@
 # Microservices Demo (MSD) - Docker Swarm Configuration
 In this tutorial we will extend the Microservices Demo (MSD) configuration and setup for a Docker Swarm environment. The same pre-requisites are required 
 
-*       [Configuration](#configuration) - Configuration and infrastructure setup
-*       [Bootstrap](#bootstrap) - Bootstrapping the Micosservices Demo (MSD) stack and services
-*       [Consumption](#consumption) - Consume the sample Beers service via CLI
+*	[Configuration](#configuration) - Configuration and infrastructure setup
+*	[Bootstrap](#bootstrap) - Bootstrapping the Micosservices Demo (MSD) stack and services
+*	[Consumption](#consumption) - Consume the sample Beers service via CLI
 
 [Bonus section](#bonus)
 
-*       [IoT Blinkt](#iot_blinkt) - Integrating an [IoT Blinkt API](https://github.com/phriscage/iot_blinkt) for some LED action!
+*	[IoT Blinkt](IOT_BLINKT.md) - Integrating an [IoT Blinkt API](https://github.com/phriscage/iot_blinkt) for some LED action!
 
 
 ## <a name="prerequisites"></a>Prerequisites:
 
-*       [Docker](https://www.docker.com) basic knowledge
-*       [Docker Swarm](ttps://docs.docker.com/engine/swarm) basic knowledge
+*	[README](README.md) - Setup the MSD
+*	[Docker Swarm](ttps://docs.docker.com/engine/swarm) basic knowledge
 *	[Docker Stack]((https://docs.docker.com/engine/swarm/stack-deploy/) basic knowledge
-*       Docker environment running
-*       Download this [repo](https://github.com/phriscage/ca_ms_demo)
+*	Docker environment running
+*	Download this [repo](https://github.com/phriscage/ca_ms_demo)
 
 
 ### <a name="configuration"></a>Configuration:
@@ -39,15 +39,6 @@ Configure bridge port:
 
 Open VBox VM settings, add Bridge port: select interface (Wifi, etc.), promiscious: allow-all, enable cable attached. This can be accomplished with VBoxManage but I don't know the commands yet...
 
-__Confgiure port forwarding:__ # not needed if bridge port enabled
-
-Open VBox VM settings, and select the NAT interface. Add Port forwarding for the following Swarm ports. This can be accomplished with VBoxManage but I don't know the commands yet...
-
-	Swarm 2377 TCP, TCP, 0.0.0.0, 2377, , 2377
-	Swarm 4789 UDP, UDP, 0.0.0.0, 4789, , 4789
-	Swarm 7946 TCP, TCP, 0.0.0.0, 7946, , 7946
-	Swarm 7946 UDP, UDP, 0.0.0.0, 7946, , 7946
-
 Start machine:
 
 	docker-machine start master.e2e.caworld.local
@@ -61,6 +52,10 @@ Initialize the Swarm:
 We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh master.e2e.caworld.local ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
 
 	docker swarm init --advertise-addr=eth1
+
+Check Swarm status
+
+	docker node ls
 
 
 ### <a name="bootstrap"></a>Bootstrap:
@@ -104,32 +99,6 @@ Consume the Beers service from the MGW:
 Consume the Beers service from the MAG:
 
 	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" https://mas.docker.local:8443/beers?auth=ca-gateway:1
-
-
-
-### <a name="iot_blinkt"></a>IoT Blinkt Bootstrap:
-
-The IoT Blinkt service needs to run on an IoT worker node which is a Raspberry Pi device with a Blinkt GPIO interface connected. Each Raspberry Pi needs to be added to the Docker swarm before the service can be created. 
-
-Create a Swarm token environment variable
-
-	SWARM_TOKEN=$(docker swarm join-token -q worker)
-
-Create a Swarm master IP address environment variable
-
-	SWARM_MASTER=$(docker info | grep -w 'Node Address' | awk '{print $3}')
-
-Loop through the IoT worker hostnames via the IOT_WORKERS environment variable and execute the swarm join command with SWARM_TOKEN and SWARM_MASTER variables defined above.
-
-	IOT_WORKERS="thing2.local thing3.local";
-	IOT_USERNAME="pi";
-	for host in $IOT_WORKERS; do
-		ssh $IOT_USERNAME@$host "docker swarm leave; docker swarm join --token $SWARM_TOKEN $SWARM_MASTER:2377"
-	done
-
-Deploy the iot_blinkt service:
-
-        docker stack deploy -c docker-compose.iot_blinkt.yml msd
 
 
 ### <a name="development"></a>Development:
