@@ -1,0 +1,35 @@
+{
+  "Service": {
+    "name": "IoT Blinkt Demo",
+    "gatewayUri": "/iot*",
+    "httpMethods": [ "get", "post" ],
+    "policy": [
+      	{
+       	    "Cors" : {}
+      	},
+	{
+	  "RequireOauth2Token": {
+	    "scope_required": "mas_storage",
+	    "scope_fail": "false",
+	    "onetime": "false",
+	    "given_access_token": ""
+	  }
+	},
+        {
+          "RateLimit" : {
+            "maxRequestsPerSecond": 100,
+            "hardLimit": true,
+            "counterName": "RateLimit-Counter"
+      	  }
+        },
+        {
+          "RouteHttp" : {
+            "targetUrl" : "http://blinkt:8080",
+            "httpMethod" : "${request.http.method}",
+	    "preserveRequestPath": true,
+	    "useAuthenticationHeader": "jwt"
+          }
+        }
+      ]
+    }
+}

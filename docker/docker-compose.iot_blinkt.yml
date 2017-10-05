@@ -6,17 +6,19 @@
 ##  Email: christopher.page@ca.com
 ##
 ################################################################################
-version: '3'
+version: '3.3'
 services:
   blinkt:
     ## iot_sys-blinkt does not require priviledged container/os access
     image: phriscage/iot_sys-blinkt:0.3.0
     volumes:
       - /sys:/sys
+    # port published with ingress mode can't be used with dnsrr mode
     ports:
       - 8000:8080
     deploy:
       mode: global
+      # endpoint_mode: dnsrr
       placement:
         constraints:
           - node.role != manager
