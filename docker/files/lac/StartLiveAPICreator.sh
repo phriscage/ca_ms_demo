@@ -17,7 +17,11 @@ else
     echo "Using MySQL database from environment variables"
 fi
 
-export LAC_DEFAULT_LICENSE_FILE=/usr/local/tomcat/bin/EvalLicense_exp20171007.txt
+if [ -z "LAC_DEFAULT_LICENSE_FILE" ]
+then
+	export LAC_DEFAULT_LICENSE_FILE=/usr/local/tomcat/bin/EvalLicense_exp20171007.txt
+fi
+
 cd /usr/local/tomcat/bin
 
 sleep 5

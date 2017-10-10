@@ -21,7 +21,9 @@ services:
       - RDS_USERNAME=lac_admin
       - RDS_PASSWORD=CAdemo123
       - ca_accept_license=enu
+      - LAC_DEFAULT_LICENSE_FILE=/tmp/CA_LAC.xml
     volumes:
+      - ${PWD}/config/CA_LAC.xml:/tmp/CA_LAC.xml
       #- ${PWD}/files/lac/BeerDataComments.json:/usr/local/tomcat/bin/BeerData.json
       - ${PWD}/files/lac/BeerData.json:/usr/local/tomcat/bin/BeerData.json
       - ${PWD}/files/lac/import_data.sh:/usr/local/tomcat/bin/import_data.sh
