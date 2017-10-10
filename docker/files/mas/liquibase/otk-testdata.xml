@@ -106,6 +106,29 @@
             <column name="custom" value="{}"/>
         </insert>
     </changeSet>
+    <changeSet author="gateway" id="create-msd-client">
+        <insert tableName="oauth_client">
+            <column name="client_ident" value="MicroservicesDemoMobileClient"/>
+            <column name="name" value="Microservices Demo Mobile Client"/>
+            <column name="description" value="MSD Mobile client for demos"/>
+            <column name="organization" value="CA Technologies"/>
+            <column name="registered_by" value="admin"/>
+            <column name="type" value="confidential"/>
+            <column name="custom" value="{}"/>
+        </insert>
+        <insert tableName="oauth_client_key">
+            <column name="client_key" value="54f0c455-4d80-421f-82ca-9194df24859f"/>
+            <column name="secret" value="54f0c455-4d80-421f-82ca-9194df24859f"/>
+            <column name="callback" value="https://ios.ssosdk.ca.com/ios"/>
+            <column name="environment" value="iOS"/>
+            <column name="status" value="ENABLED"/>
+            <column name="created_by" value="admin"/>
+            <column name="client_ident" value="MicroservicesDemoMobileClient"/>
+            <column name="client_name" value="Microservices Demo Mobile Client"/>
+            <column name="scope" value="openid email profile phone address msso_register msso_client_register mas_storage no-id-token oob iot"/>
+            <column name="custom" value="{}"/>
+        </insert>
+    </changeSet>
     <changeSet author="gateway" id="oauth2-client-update-callback" runOnChange="true">
         <update tableName="oauth_client_key">
             <column name="callback" value="${OTK_HOSTNAME}/oauth/v2/client/authcode?auth=done,${OTK_HOSTNAME}/oauth/v2/client/implicit?auth=done"/>

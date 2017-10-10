@@ -68,7 +68,8 @@ Export variables into current session:
 
 Core services:
 
-	docker stack deploy -c docker-compose.yml msd
+	~~docker stack deploy -c docker-compose.yml msd~~ _need to use Docker-MAS 4.0.0-CR01 until IdP is fixed_
+	docker stack deploy -c docker-compose.4.0.0-CR01.yml msd
 
 Beer services:
 

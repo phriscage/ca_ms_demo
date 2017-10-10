@@ -1,0 +1,186 @@
+################################################################################
+##
+##  Purpose: Define a miroservice for retrieving beer data from two separate
+##    databases. Define a microservice for validting a JWT and exchanging tokens
+##    Protect both MS with a mgw and leverage MAS as the OAuth hub.
+##
+##  Email: christopher.page@ca.com
+##
+################################################################################
+version: '3'
+services:
+  consul:
+    command: "agent -server -ui -bootstrap -client 0.0.0.0"
+    image: consul:0.9.3
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+      - SERVICE_IGNORE=yes
+    ports:
+      - 8500:8500
+  registrator:
+    command: "-internal -retry-attempts -1 consul://consul.:8500"
+    image: gliderlabs/registrator:master
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock"
+  developer-console:
+    image: caapimcollab/mobile-developer-console:1.0.00
+    ports:
+      - ${MDC_PORT}:443
+    environment:
+     - SERVICE_IGNORE=yes
+     - MAS_HOSTNAME
+     - MDC_HOSTNAME
+     - MDC_PORT
+    volumes:
+      # custom entrypoint for x509 SAN creation
+     - ${PWD}/files/mdc/docker-entrypoint.sh:/docker-entrypoint.sh:rw
+     - ${PWD}/config/certs/mas.cert.pem:/etc/nginx/ssl/dev-console.crt
+     - ${PWD}/config/certs/mas.key:/etc/nginx/ssl/dev-console.key
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  mysqldb:
+    image: mysql:5.5
+    environment:
+      - SERVICE_IGNORE=yes
+      - MYSQL_USER=db_admin
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE=otk_db
+      - MYSQL_ROOT_PASSWORD=CAdemo123
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ${PWD}/files/mysql/scripts/startup/:/docker-entrypoint-initdb.d/
+      - ${PWD}/files/mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+    deploy:
+      resources:
+        limits:
+          memory: 256m
+  mas:
+    #image: caapimcollab/mobile-app-services:4.0.02-beta
+    image: caapimcollab/mobile-app-services:4.0.00-CR01
+    ports:
+      - ${MAS_PORT}:8443
+      - 8883:8883
+    hostname: ${MAS_HOSTNAME}
+    volumes:
+      - /opt/docker/rc.d/bootstrap/restman
+      - /opt/docker/rc.d/bootstrap/policyman
+      - ${PWD}/files/mas/liquibase/otk-testdata.xml:/db/liquibase/otk-testdata.xml
+      - ${PWD}/files/mas/liquibase/mag-otk-testdata.xml:/db/liquibase/mag-otk-testdata.xml # required for 4.0.00-CR01
+      - ${PWD}/files/mas/liquibase/mag-testdata.xml:/db/liquibase/mag-testdata.xml # required for 4.0.00-CR01
+      - ${PWD}/files/mas/liquibase/mas-identity-testdata.xml:/db/liquibase/mas-identity-testdata.xml
+      - ${PWD}/files/mas/bundles/proxy_folder.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/proxy_folder.bundle
+      ## add the OTK federated user x509 for MGW bootstrap
+      - ${PWD}/files/mas/provision/add-otk-user.sh:/opt/docker/rc.d/after-start/add-otk-user.sh:rw
+      - ${PWD}/files/mas/provision/x-add-otk-user.sh:/opt/docker/rc.d/after-start/x-add-otk-user.sh:rw
+    env_file:
+      - ${PWD}/.env
+    # override the env_file defaults with shell environment variables
+    environment:
+      - SERVICE_IGNORE=yes
+      - HOSTNAME=${MAS_HOSTNAME}
+      - MAS_HOSTNAME   
+      - MDC_HOSTNAME    
+      - OTK_HOSTNAME
+      - SSG_LICENSE # required for 4.0.00-CR01
+      - SSG_SSL_KEY=${MAS_SSL_KEY_B64}
+      - SSG_SSL_KEY_PASS=${MAS_SSL_KEY_PASS}
+      - MGW_SSL_PUBLIC_CERT_B64
+      # Default settings
+      - SSG_CLUSTER_PASSWORD
+      - SSG_DATABASE_TYPE
+      - SSG_DATABASE_DERBY_IN_MEMORY
+      - SSG_JVM_HEAP
+      - BUNDLE_TEMPLATE_HOSTNAME
+      - BUNDLE_TEMPLATE_OTK_HOSTNAME
+      - BUNDLE_TEMPLATE_HOSTNAME_ENCODED
+      - BUNDLE_TEMPLATE_PROTOCOL_HOSTNAME_ENCODED
+      - BUNDLE_TEMPLATE_OTK_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_OTK_DATABASE_NAME
+      - BUNDLE_TEMPLATE_OTK_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_OTK_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_MAG_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_MAG_DATABASE_NAME
+      - BUNDLE_TEMPLATE_MAG_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_MAG_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_NAME
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_IDENTITY_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_NAME
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_STORAGE_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_MESSAGING_BROKER_HOST
+      - BUNDLE_TEMPLATE_MESSAGING_BROKER_PORT
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_HOST=${DATABASE_HOST}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_PORT=${DATABASE_PORT}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_USER=${DATABASE_USER}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_PASSWORD=${DATABASE_USER_PASSWORD}
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_NAME
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_TYPE
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_DATABASE_MYSQL_ENABLED
+      - BUNDLE_TEMPLATE_DEV_CONSOLE_CALLBACK
+      - ADD_TEST_USERS_GROUPS
+      - ADD_TEST_CLIENTS=true
+      - ACCEPT_LICENSE=true
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+  mgw:
+    image: caapimcollab/microgateway:beta2
+    # image: caapim/microgateway:1.0.00
+    ports:
+      - 9443:9443
+    volumes:
+      - ${PWD}/files/mgw/quickstart/beer_data.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/beer_data.json
+      - ${PWD}/files/mgw/quickstart/iot_blinkt.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/iot_blinkt.json
+      - ${PWD}/files/mgw/quickstart/token_exchange.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/token_exchange.json
+      - ${PWD}/files/mgw/bundles/token_exchange.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/token_exchange.bundle
+      # - ${PWD}/files/mgw/bundles/RouteHttp.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/RouteHttp.bundle
+      - ${PWD}/files/mgw/bundles/consul.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/consul.bundle
+    environment:
+      - SERVICE_IGNORE=yes
+      - SSG_ADMIN_USERNAME=admin
+      - SSG_ADMIN_PASSWORD=password
+      - SSG_SSL_KEY=${MGW_SSL_KEY_B64}
+      - SSG_SSL_KEY_PASS=${MGW_SSL_KEY_PASS}
+      - MGW_SSL_PUBLIC_CERT_B64=${MGW_SSL_PUBLIC_CERT_B64}
+      - ACCEPT_LICENSE=true
+      #- SSG_LICENSE=${MGW_LICENSE}
+      - SSG_LICENSE
+      - SSG_INTERNAL_SERVICES=restman
+
+      - SCALER_ENABLE=false
+      - SCALER_STORAGE_TYPE=db
+      - SCALER_DB_TYPE=mysql
+      - SCALER_DB_HOST=cadbhost
+      - SCALER_DB_PORT=3306
+      - SCALER_DB_NAME=qstr
+      - SCALER_DB_USER=causer
+      - SCALER_DB_PASSWORD=capassword
+
+      - OTK_SERVER_HOST=mas
+      - OTK_SERVER_SSL_PORT=${MAS_PORT}
+      - OTK_CERTIFICATE=${MAS_SSL_PUBLIC_CERT_B64}
+      - OTK_CERT_VERIFY_HOSTNAME=false
+    deploy:
+      resources:
+        limits:
+          memory: 2048m
+volumes:
+  mysql-data:
