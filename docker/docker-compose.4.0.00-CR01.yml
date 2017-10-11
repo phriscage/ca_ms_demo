@@ -66,13 +66,14 @@ services:
     volumes:
       - /opt/docker/rc.d/bootstrap/restman
       - /opt/docker/rc.d/bootstrap/policyman
+      - ${PWD}/config/CA_MOB_9.xml:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/license/mag-license.xml
       - ${PWD}/files/mas/liquibase/otk-testdata.xml:/db/liquibase/otk-testdata.xml
       - ${PWD}/files/mas/liquibase/mag-otk-testdata.xml:/db/liquibase/mag-otk-testdata.xml # required for 4.0.00-CR01
       - ${PWD}/files/mas/liquibase/mag-testdata.xml:/db/liquibase/mag-testdata.xml # required for 4.0.00-CR01
       - ${PWD}/files/mas/liquibase/mas-identity-testdata.xml:/db/liquibase/mas-identity-testdata.xml
       - ${PWD}/files/mas/bundles/proxy_folder.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/proxy_folder.bundle
       ## add the OTK federated user x509 for MGW bootstrap
-      - ${PWD}/files/mas/provision/add-otk-user.sh:/opt/docker/rc.d/after-start/add-otk-user.sh:rw
+      - ${PWD}/files/mas/provision/add-otk-user.sh:/var/tmp/add-otk-user.sh:rw
       - ${PWD}/files/mas/provision/x-add-otk-user.sh:/opt/docker/rc.d/after-start/x-add-otk-user.sh:rw
     env_file:
       - ${PWD}/.env

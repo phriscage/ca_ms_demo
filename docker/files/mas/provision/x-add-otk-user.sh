@@ -12,7 +12,7 @@ MGW_fqdn="mgw.docker.local"
 MGW_cert="$(echo $MGW_SSL_PUBLIC_CERT_B64)"
 #ABSOLUTE_PATH="$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)"
 #current_dir="$(pwd -P)"
-add_cmd="/opt/docker/rc.d/after-start/add-otk-user.sh"
+add_cmd="/var/tmp/add-otk-user.sh"
 #add_cmd="./add-otk-user.sh"
 
 ## Capture any command-line arguments
