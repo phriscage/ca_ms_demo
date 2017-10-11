@@ -44,6 +44,10 @@ services:
       - RDS_PASSWORD=CAdemo123
       - ca_accept_license=enu
       #- ESPRESSO_FORCE_DATASOURCE=true
+      - LAC_DEFAULT_LICENSE_FILE=/tmp/CA_LAC.xml
+    volumes:
+      - ${PWD}/config/CA_LAC.xml:/tmp/CA_LAC.xml
+      - ${PWD}/files/lac/StartLiveAPICreator.sh:/usr/local/tomcat/bin/StartLiveAPICreator.sh
   lac_mysql:
     image: 'mysql:5.6.30'
     environment:
