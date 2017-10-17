@@ -146,10 +146,11 @@ class LoginViewController: UIViewController {
         
       } else {
         
-        //Show the APICall ViewController
+        //Show the TabBarViewController
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "mainTabBarController")
-        self.present(controller, animated: true, completion: nil)
+        let switchViewController = storyboard.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
+        switchViewController.selectedIndex = 1 // 2nd tab controller
+        self.present(switchViewController, animated: true, completion: nil)
         
       }
       

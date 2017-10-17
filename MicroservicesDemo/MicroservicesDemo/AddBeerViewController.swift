@@ -16,6 +16,7 @@ class AddBeerViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet var beerName: UITextField!
   @IBOutlet var beerStyle: UITextField!
   @IBOutlet var beerPrice: UITextField!
+  @IBOutlet var submitButton: UIButton!
   
   
   override func viewDidLoad() {
@@ -67,6 +68,7 @@ class AddBeerViewController: UIViewController, UITextFieldDelegate {
       
       // dissmiss controller. need to wait 1 second so the Rate Limiting isn't triggered.
       let switchViewController = self.storyboard?.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
+      switchViewController.selectedIndex = 1 // 2nd tab controller
       let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
       DispatchQueue.main.asyncAfter(deadline: when) {
 

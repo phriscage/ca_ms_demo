@@ -44,13 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITextField.appearance().borderWidth = 2
     UITextField.appearance().borderColor = UIColor.white    
 
+    // This impacts UIBarButtonItem so need to figure out how not to do that before enabling...
     // Sets the default color of the UIButtons and rounded corners using UIButton extension
     UIButton.appearance().setTitleColor(UIColor.white, for: .normal)
     UIButton.appearance().backgroundColor = .clear
     UIButton.appearance().cornerRadius = 5
     UIButton.appearance().borderWidth = 2
     UIButton.appearance().borderColor = UIColor.white
-
+    
     return true
   }
   

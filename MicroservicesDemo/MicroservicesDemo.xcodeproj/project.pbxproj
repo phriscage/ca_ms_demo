@@ -21,6 +21,7 @@
 		D505061E1EFC51DA008720BD /* LoginAnimation.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D505061D1EFC51DA008720BD /* LoginAnimation.mp4 */; };
 		D52D13A21F06D70200499D0D /* AddBeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52D13A11F06D70200499D0D /* AddBeerViewController.swift */; };
 		D55E5EBF1F12FDDA0017F7BA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55E5EBE1F12FDDA0017F7BA /* Extensions.swift */; };
+		D56A58F31F95461B000FC602 /* BlinktViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56A58F21F95461B000FC602 /* BlinktViewController.swift */; };
 		D592F0751F0FD5A1007D6AAB /* BeersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D592F0741F0FD5A1007D6AAB /* BeersTableViewCell.swift */; };
 		D595B5DE1F059E9A00CF8EF1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D595B5DD1F059E9A00CF8EF1 /* ProfileViewController.swift */; };
 		D5C4463E1F031A8E00E31142 /* MSUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C4463D1F031A8E00E31142 /* MSUtility.swift */; };
@@ -47,6 +48,7 @@
 		D52D13A11F06D70200499D0D /* AddBeerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBeerViewController.swift; sourceTree = "<group>"; };
 		D534AD3A1EFC3C94008E9381 /* MicroservicesDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MicroservicesDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		D55E5EBE1F12FDDA0017F7BA /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D56A58F21F95461B000FC602 /* BlinktViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinktViewController.swift; sourceTree = "<group>"; };
 		D592F0741F0FD5A1007D6AAB /* BeersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeersTableViewCell.swift; sourceTree = "<group>"; };
 		D595B5DD1F059E9A00CF8EF1 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D5C4463D1F031A8E00E31142 /* MSUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSUtility.swift; sourceTree = "<group>"; };
@@ -115,12 +117,13 @@
 			isa = PBXGroup;
 			children = (
 				CD0C93F11EBB910B0005B636 /* AppDelegate.swift */,
-				CD0C940F1EBB929B0005B636 /* LoginViewController.swift */,
+				D52D13A11F06D70200499D0D /* AddBeerViewController.swift */,
 				CD01ADDB1EC234F8002AE443 /* BeersTableViewController.swift */,
 				D592F0741F0FD5A1007D6AAB /* BeersTableViewCell.swift */,
 				CD01ADE71EC279D2002AE443 /* BeerDetailsViewController.swift */,
+				D56A58F21F95461B000FC602 /* BlinktViewController.swift */,
+				CD0C940F1EBB929B0005B636 /* LoginViewController.swift */,
 				D595B5DD1F059E9A00CF8EF1 /* ProfileViewController.swift */,
-				D52D13A11F06D70200499D0D /* AddBeerViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				D55E5EBF1F12FDDA0017F7BA /* Extensions.swift in Sources */,
 				D592F0751F0FD5A1007D6AAB /* BeersTableViewCell.swift in Sources */,
 				D595B5DE1F059E9A00CF8EF1 /* ProfileViewController.swift in Sources */,
+				D56A58F31F95461B000FC602 /* BlinktViewController.swift in Sources */,
 				CD0C93F21EBB910B0005B636 /* AppDelegate.swift in Sources */,
 				CD01ADE81EC279D2002AE443 /* BeerDetailsViewController.swift in Sources */,
 			);
