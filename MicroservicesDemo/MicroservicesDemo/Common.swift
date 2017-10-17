@@ -17,6 +17,8 @@ class Common: NSObject {
     static let lacAuthKey = "ca-gateway:1"
     static let urlBeerList = "/beers"
     static let urlBeerListWithAuth = "/beers?auth=\(lacAuthKey)&sysorder=(updated_at:desc)"
+    static let urlIoTBlinktRandom = "/iot/blinkts/random"
+    static let urlIoTBlinktRandomWithAuth = "/iot/blinkts/random?auth=\(lacAuthKey)&delay=10"
     // themColor to match the lock background hex #010A1D?
     //    static let themeColor = UIColor(red:0.00, green:0.03, blue:0.05, alpha:1.0) // not dark enough
     //    static let themeColor = UIColor(red:0.00, green:0.00, blue:0.10, alpha:1.0) // close

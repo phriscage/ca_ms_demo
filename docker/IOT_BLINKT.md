@@ -50,3 +50,13 @@ Consume the Beers service from the MAG without LAC auth:
 Consume the Beers service from the MAG w/ LAC auth:
 
         curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.docker.local:8443/beers?auth=ca-gateway:1&blinkt=true'
+
+
+Consume the Blinkt service directly:
+
+	curl -k -4 -i -X POST -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.docker.local:8443/iot/blinkts/random?delay=100'
+
+
+Consume the Blinkt service in a loop:
+
+	while ((1)); do curl -k -4 -i -X POST -i -H "Authorization: Bearer $ACCESS_TOKEN" "https://mas.docker.local:8443/iot/blinkts/random?delay=10"; done

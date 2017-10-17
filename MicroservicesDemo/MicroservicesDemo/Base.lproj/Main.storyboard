@@ -453,24 +453,46 @@
                                     <constraint firstAttribute="height" constant="618" id="vzW-ci-BqN"/>
                                 </constraints>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIR-XB-OyI">
+                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIR-XB-OyI">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0026387006509999999" green="0.03730293363" blue="0.1120425239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Blinkt" id="xrF-Gy-vQz"/>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EhD-H5-0Az">
+                                <rect key="frame" x="100" y="412" width="174" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="4Pl-k9-vle"/>
+                                    <constraint firstAttribute="width" constant="174" id="eGm-gj-KgU"/>
+                                </constraints>
+                                <state key="normal" title="Blinkt">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="bottom" secondItem="gAg-fi-UhP" secondAttribute="top" id="02Q-1F-NYR"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" constant="100" id="0ww-zP-NC5"/>
+                            <constraint firstAttribute="bottom" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="213" id="1FB-sl-Otz"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="un9-qo-5yT" secondAttribute="centerX" id="DB0-QS-dD7"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leadingMargin" constant="84" id="DID-fZ-tQS"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="GIR-XB-OyI" secondAttribute="centerX" id="JjR-lV-VeO"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" constant="100" id="Vav-Az-vFJ"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="CW8-fM-mVS" secondAttribute="centerX" id="cFH-dn-9q6"/>
+                            <constraint firstItem="gAg-fi-UhP" firstAttribute="top" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="164" id="iud-kl-Rbs"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="top" secondItem="un9-qo-5yT" secondAttribute="top" constant="412" id="kH1-b1-Hi9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EhD-H5-0Az" secondAttribute="trailing" constant="85" id="pQv-ZN-SQB"/>
                             <constraint firstAttribute="trailing" secondItem="CW8-fM-mVS" secondAttribute="trailing" id="pa5-RK-YPA"/>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" id="vNL-7Y-iS3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Blinkt" image="Raspberry Pi icon" id="7LI-GQ-9lN"/>
                     <navigationItem key="navigationItem" title="Blinkt" id="MbQ-XC-7vi"/>
+                    <connections>
+                        <outlet property="blinktButton" destination="EhD-H5-0Az" id="N60-4J-ys2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogq-ud-VsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
