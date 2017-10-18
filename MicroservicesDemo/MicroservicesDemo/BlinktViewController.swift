@@ -14,7 +14,8 @@ class BlinktViewController: UIViewController {
   
   @IBOutlet var blinktButton: UIButton!
   var timer: Timer!
-  var blinktCount = 50
+  var defaultBlinktCount = 20
+  var blinktCount = 20
   var requestPauseTime = 1.0
   var requestTimeInterval = 0.10
   
@@ -53,17 +54,15 @@ class BlinktViewController: UIViewController {
   // Button is pressed
   func buttonDown(sender: AnyObject) {
     singleFire()
-    let when = DispatchTime.now() + requestPauseTime // change 2 to desired number of seconds
-    DispatchQueue.main.asyncAfter(deadline: when) {
-      // Your code with delay
-      self.timer = Timer.scheduledTimer(timeInterval: self.requestTimeInterval, target: self, selector: #selector(BlinktViewController.rapidFire), userInfo: nil, repeats: true)
-    }
+    timer = Timer.scheduledTimer(timeInterval: self.requestTimeInterval, target: self, selector: #selector(BlinktViewController.rapidFire), userInfo: nil, repeats: true)
   }
   
   // Button is released
   func buttonUp(sender: AnyObject) {
-    timer.invalidate()
-    blinktCount = 100
+    if timer != nil {
+      timer.invalidate()
+    }
+    blinktCount = defaultBlinktCount
   }
   
   // single execution
@@ -80,7 +79,7 @@ class BlinktViewController: UIViewController {
       postBlinkt()
     } else {
       print("out of blinkts, dude!")
-      blinktCount = 100
+      blinktCount = defaultBlinktCount
       timer.invalidate()
     }
   }
@@ -92,7 +91,7 @@ class BlinktViewController: UIViewController {
       print(MASUser.current()?.accessToken as Any)
     }
     
-//    MAS.post(to: Common.Constants.urlIoTBlinktRandom, withParameters: ["auth":Common.Constants.lacAuthKey], andHeaders: [:], completion:  { (response, error) in
+    //    MAS.post(to: Common.Constants.urlIoTBlinktRandom, withParameters: ["auth":Common.Constants.lacAuthKey], andHeaders: [:], completion:  { (response, error) in
     MAS.post(to: Common.Constants.urlIoTBlinktRandomWithAuth, withParameters: [:], andHeaders: [:], completion:  { (response, error) in
       if (error != nil) {
         var message:String
@@ -118,9 +117,6 @@ class BlinktViewController: UIViewController {
         
       } else {
         
-        if let headerResponse = response?[MASResponseInfoHeaderInfoKey] as? [String: AnyObject] {
-          print(headerResponse)
-        }
         print(response?[MASResponseInfoBodyInfoKey]! as Any)
         
       }

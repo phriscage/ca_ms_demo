@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -453,7 +453,7 @@
                                     <constraint firstAttribute="height" constant="618" id="vzW-ci-BqN"/>
                                 </constraints>
                             </imageView>
-                            <navigationBar contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GIR-XB-OyI">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GIR-XB-OyI">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.0026387006509999999" green="0.03730293363" blue="0.1120425239" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
@@ -463,8 +463,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EhD-H5-0Az">
                                 <rect key="frame" x="100" y="412" width="174" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="4Pl-k9-vle"/>
-                                    <constraint firstAttribute="width" constant="174" id="eGm-gj-KgU"/>
+                                    <constraint firstAttribute="height" constant="42" id="i72-wO-Q2E"/>
                                 </constraints>
                                 <state key="normal" title="Blinkt">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -474,17 +473,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="bottom" secondItem="gAg-fi-UhP" secondAttribute="top" id="02Q-1F-NYR"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" constant="100" id="0ww-zP-NC5"/>
-                            <constraint firstAttribute="bottom" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="213" id="1FB-sl-Otz"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="un9-qo-5yT" secondAttribute="centerX" id="DB0-QS-dD7"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leadingMargin" constant="84" id="DID-fZ-tQS"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="GIR-XB-OyI" secondAttribute="centerX" id="JjR-lV-VeO"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" constant="100" id="Vav-Az-vFJ"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="CW8-fM-mVS" secondAttribute="centerX" id="cFH-dn-9q6"/>
-                            <constraint firstItem="gAg-fi-UhP" firstAttribute="top" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="164" id="iud-kl-Rbs"/>
-                            <constraint firstItem="EhD-H5-0Az" firstAttribute="top" secondItem="un9-qo-5yT" secondAttribute="top" constant="412" id="kH1-b1-Hi9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="EhD-H5-0Az" secondAttribute="trailing" constant="85" id="pQv-ZN-SQB"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="CW8-fM-mVS" secondAttribute="centerX" id="Jy4-GF-pgT"/>
+                            <constraint firstItem="gAg-fi-UhP" firstAttribute="top" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="164" id="LAo-88-WVt"/>
+                            <constraint firstItem="GIR-XB-OyI" firstAttribute="bottom" secondItem="4XL-u5-N3B" secondAttribute="bottom" id="Vm4-zX-7ZV"/>
+                            <constraint firstItem="GIR-XB-OyI" firstAttribute="leading" secondItem="CW8-fM-mVS" secondAttribute="leading" id="Vsh-yd-Fi9"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="GIR-XB-OyI" secondAttribute="centerX" id="hlG-mI-vA6"/>
                             <constraint firstAttribute="trailing" secondItem="CW8-fM-mVS" secondAttribute="trailing" id="pa5-RK-YPA"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leadingMargin" constant="84" id="sXO-C6-mx2"/>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" id="vNL-7Y-iS3"/>
                         </constraints>
                     </view>
