@@ -29,11 +29,11 @@ Virtual Box deployment:
 
 Create boot2docker image:
 
-	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true master.e2e.caworld.local
+	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true mas.e2e
 
 Stop machine:
 
-	docker-machine stop master.e2e.caworld.local
+	docker-machine stop mas.e2e
 
 Configure bridge port:
 
@@ -41,15 +41,15 @@ Open VBox VM settings, add Bridge port: select interface (Wifi, etc.), promiscio
 
 Start machine:
 
-	docker-machine start master.e2e.caworld.local
+	docker-machine start mas.e2e
 
 Set environment:
 
-	eval $(docker-machine env master.e2e.caworld.local)
+	eval $(docker-machine env mas.e2e)
 
 Initialize the Swarm:
 
-We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh master.e2e.caworld.local ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
+We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh mas.e2e ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
 
 	docker swarm init --advertise-addr=eth1
 
@@ -68,8 +68,8 @@ Export variables into current session:
 
 Core services:
 
-	~~docker stack deploy -c docker-compose.yml msd~~ _need to use Docker-MAS 4.0.0-CR01 until IdP is fixed_
-	docker stack deploy -c docker-compose.4.0.0-CR01.yml msd
+	~~docker stack deploy -c docker-compose.yml msd~~ _need to use Docker-MAS 4.0.00-CR01 until IdP is fixed_
+	docker stack deploy -c docker-compose.4.0.00-CR01.yml msd
 
 Beer services:
 
