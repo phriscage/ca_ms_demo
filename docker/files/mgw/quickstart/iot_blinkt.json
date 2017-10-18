@@ -18,7 +18,7 @@
         {
           "RateLimit" : {
             "maxRequestsPerSecond": 100,
-            "hardLimit": true,
+            "hardLimit": false,
             "counterName": "RateLimit-Counter"
       	  }
         },
