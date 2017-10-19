@@ -79,6 +79,7 @@ services:
       - SERVICE_IGNORE=yes
       - HOSTNAME=${MAS_HOSTNAME}
       - MAS_HOSTNAME   
+      - MGW_HOSTNAME # required until add-otk-user is automated
       - MDC_HOSTNAME    
       - OTK_HOSTNAME
       #- SSG_LICENSE

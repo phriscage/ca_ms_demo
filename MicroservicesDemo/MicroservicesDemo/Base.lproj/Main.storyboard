@@ -461,7 +461,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EhD-H5-0Az">
-                                <rect key="frame" x="100" y="412" width="174" height="42"/>
+                                <rect key="frame" x="100" y="484" width="174" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="i72-wO-Q2E"/>
                                 </constraints>
@@ -469,15 +469,40 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Blinks" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8kI-aP-N90">
+                                <rect key="frame" x="146" y="104" width="82" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="S4g-3T-LOV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXb-df-hTj">
+                                <rect key="frame" x="100" y="430" width="174" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="NWa-J2-OeW"/>
+                                </constraints>
+                                <state key="normal" title="Color">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="blinktColorButtonClicked:" destination="7zY-dl-hIE" eventType="touchUpInside" id="pzJ-gF-ZX3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="bottom" secondItem="gAg-fi-UhP" secondAttribute="top" id="02Q-1F-NYR"/>
+                            <constraint firstItem="cXb-df-hTj" firstAttribute="leading" secondItem="EhD-H5-0Az" secondAttribute="leading" id="6Cc-1S-QMU"/>
+                            <constraint firstItem="8kI-aP-N90" firstAttribute="top" secondItem="GIR-XB-OyI" secondAttribute="bottom" constant="40" id="Hmo-hq-2eF"/>
                             <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="CW8-fM-mVS" secondAttribute="centerX" id="Jy4-GF-pgT"/>
-                            <constraint firstItem="gAg-fi-UhP" firstAttribute="top" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="164" id="LAo-88-WVt"/>
+                            <constraint firstItem="gAg-fi-UhP" firstAttribute="top" secondItem="EhD-H5-0Az" secondAttribute="bottom" constant="92" id="LAo-88-WVt"/>
                             <constraint firstItem="GIR-XB-OyI" firstAttribute="bottom" secondItem="4XL-u5-N3B" secondAttribute="bottom" id="Vm4-zX-7ZV"/>
                             <constraint firstItem="GIR-XB-OyI" firstAttribute="leading" secondItem="CW8-fM-mVS" secondAttribute="leading" id="Vsh-yd-Fi9"/>
+                            <constraint firstItem="cXb-df-hTj" firstAttribute="centerX" secondItem="8kI-aP-N90" secondAttribute="centerX" id="dQY-s0-ci1"/>
                             <constraint firstItem="EhD-H5-0Az" firstAttribute="centerX" secondItem="GIR-XB-OyI" secondAttribute="centerX" id="hlG-mI-vA6"/>
+                            <constraint firstItem="EhD-H5-0Az" firstAttribute="top" secondItem="cXb-df-hTj" secondAttribute="bottom" constant="12" id="n82-Jd-8Jx"/>
+                            <constraint firstItem="cXb-df-hTj" firstAttribute="trailing" secondItem="EhD-H5-0Az" secondAttribute="trailing" id="p97-KG-efh"/>
                             <constraint firstAttribute="trailing" secondItem="CW8-fM-mVS" secondAttribute="trailing" id="pa5-RK-YPA"/>
                             <constraint firstItem="EhD-H5-0Az" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leadingMargin" constant="84" id="sXO-C6-mx2"/>
                             <constraint firstItem="CW8-fM-mVS" firstAttribute="leading" secondItem="un9-qo-5yT" secondAttribute="leading" id="vNL-7Y-iS3"/>
@@ -487,11 +512,13 @@
                     <navigationItem key="navigationItem" title="Blinkt" id="MbQ-XC-7vi"/>
                     <connections>
                         <outlet property="blinktButton" destination="EhD-H5-0Az" id="N60-4J-ys2"/>
+                        <outlet property="blinktColorButton" destination="cXb-df-hTj" id="nT4-Dl-JWE"/>
+                        <outlet property="blinktCounterField" destination="8kI-aP-N90" id="HQg-S7-IfU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ogq-ud-VsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2233" y="68"/>
+            <point key="canvasLocation" x="2232.8000000000002" y="67.916041979010501"/>
         </scene>
         <!--Blinkt Navigation Controller-->
         <scene sceneID="4q8-AQ-Pf5">

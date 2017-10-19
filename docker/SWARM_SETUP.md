@@ -23,17 +23,17 @@ In this tutorial we will extend the Microservices Demo (MSD) configuration and s
 
 Docker Swarm involves nodes, services, and tasks. A node is an Docker host that is running the Docker daemon andpart of a group of nodes or swarm. A service is the definition of tasks that will be execute on nodes in the swarm. The services are the application context that is definedin your Dcoker Compose. Docker Stack provides a command to deploy services from your [docker-compose.yml](docker-compose.yml) to a swarm. Docker stack does not source environment variables from [.env](.env) like Docker Compose. You will need to source them first, then [.custom.env](.custom.env), then *docker stack deploy* to get the services started.
 
-Docker Swarm for MAC has some issues with the overlay networking and multiple nodes are not supported, [issue](https://github.com/docker/for-mac/issues/67). You can setup a single-node Docker Swarm cluster with the MAC, but for now, we will use Docker Machine to provision a boot2docker image. in Virtual Box or other IaaS providers so below is how to get VirtualBox setup. _--virtualbox-host-dns-resolver=true_ is required if not using Docker DNS for MAS HOSTNAME environment variables or localhost 
+Docker Swarm for MAC has some issues with the overlay networking and multiple nodes are not supported, [issue](https://github.com/docker/for-mac/issues/67). You can setup a single-node Docker Swarm cluster with the MAC, but for now, we will use Docker Machine to provision a boot2docker image. in Virtual Box or other IaaS providers so below is how to get VirtualBox setup. _--virtualbox-host-dns-resolver=true_ is required if not using Docker DNS for MAS HOSTNAME environment variables or localhost. You can change the *.docker.local* domain if you are using public facing hosts.
 
 Virtual Box deployment:
 
 Create boot2docker image:
 
-	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true mas.e2e
+	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true mas.docker
 
 Stop machine:
 
-	docker-machine stop mas.e2e
+	docker-machine stop mas.docker
 
 Configure bridge port:
 
@@ -41,15 +41,15 @@ Open VBox VM settings, add Bridge port: select interface (Wifi, etc.), promiscio
 
 Start machine:
 
-	docker-machine start mas.e2e
+	docker-machine start mas.docker
 
 Set environment:
 
-	eval $(docker-machine env mas.e2e)
+	eval $(docker-machine env mas.docker)
 
 Initialize the Swarm:
 
-We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh mas.e2e ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
+We need to utilize a reachable IP address from the worker nodes if the VB IP is not public. My worker devices are on the same Wifi network as en0 so the VM bridged port should be in the same subnet. `docker-machine ssh mas.docker ifconfig eth1` _--advertise-addr_ Typically this is *eth1* for the bridged network:
 
 	docker swarm init --advertise-addr=eth1
 

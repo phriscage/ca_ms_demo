@@ -82,6 +82,7 @@ services:
       - SERVICE_IGNORE=yes
       - HOSTNAME=${MAS_HOSTNAME}
       - MAS_HOSTNAME   
+      - MGW_HOSTNAME # required until add-otk-user is automated
       - MDC_HOSTNAME    
       - OTK_HOSTNAME
       - SSG_LICENSE # required for 4.0.00-CR01
@@ -161,6 +162,7 @@ services:
       - SSG_SSL_KEY=${MGW_SSL_KEY_B64}
       - SSG_SSL_KEY_PASS=${MGW_SSL_KEY_PASS}
       - MGW_SSL_PUBLIC_CERT_B64=${MGW_SSL_PUBLIC_CERT_B64}
+      - MGW_HOSTNAME # required until add-otk-user is automated
       - ACCEPT_LICENSE=true
       #- SSG_LICENSE=${MGW_LICENSE}
       - SSG_LICENSE
