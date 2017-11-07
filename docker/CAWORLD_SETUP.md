@@ -1,12 +1,12 @@
 # Microservices Demo (MSD) - Docker Swarm Configuration for CA World
-This is the cheat-sheet to get the CA World 17 demo using *.e2e.caworld.local* as the domain. 
+This is the cheat-sheet to get the CA World 17 demo using *.e2e.caworld.local* as the domain. Full setup is in [SWARM_SETUP](SWARM_SETUP.md). Xcode 9.1 and Docker 17.09.0-ce client required.
 
-*    [Configuration](#configuration) - Configuration and infrastructure setup (VirtualBox only required one time)
+*    [Configuration](#configuration) - Configuration and infrastructure setup (VirtualBox configuration only required once)
 *    [Bootstrap](#bootstrap) - Bootstrapping the Micosservices Demo (MSD) stack and services
 *    [Consumption](#consumption) - Consume the sample Beers and IoT services via CLI and iOS app
 *    [Clean-Up](#cleanup) - Clean-Up services and restart [Bootstrap](#bootstrap)
 
-All the local DNS names for accessing the product administrative interfaces:
+All the local DNS names for accessing the platform user interfaces:
 
 	https://mas.e2e.caworld.local
 	https://mgw.e2e.caworld.local:9443/quickstart/1.0/doc
@@ -14,74 +14,21 @@ All the local DNS names for accessing the product administrative interfaces:
 	http://consul.e2e.caworld.local:8500
 
 
-### <a name="bootstrap"></a>Bootstrap:
-Deploy the core and Beers application
-
-	export $(grep -v "^#" .env); source .custom.caw17.env;
-
-	docker stack deploy -c docker-compose.yml msd
-
-	docker stack deploy -c docker-compose.beers.yml msd
-
-	docker service ls
-
-Deploy the iot_blinkt service (not required if you do not have IoT devices):
-
-        docker stack deploy -c docker-compose.iot_blinkt.yml msd
-
-	docker service ls
-
-
-### <a name="consume"></a>Consume:
-Make sure all services are healthy before trying to consume them. I.E. *replicas* from `docker service ls` should not have any zeros '0'
-
-Get a Access Token:
-
-	CLIENT_ID=54f0c455-4d80-421f-82ca-9194df24859e; CLIENT_SECRET=a0f2742f-31c7-436f-9802-b7015b8fd8e7; export ACCESS_TOKEN=`curl -s -4 -k -X POST 'Content-Type: application/x-www-form-urlencoded' --data-urlencode "client_id=$CLIENT_ID" --data-urlencode "client_secret=$CLIENT_SECRET" --data-urlencode 'grant_type=client_credentials' --data-urlencode 'scope=mas_storage oob' https://mas.e2e.caworld.local:8443/auth/oauth/v2/token | python  -c "import sys, json; print json.load(sys.stdin)['access_token']"`; echo $ACCESS_TOKEN;
-
-Test Beers service:
-
-Consume the Beers service from the MGW:
-
-	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" https://mgw.e2e.caworld.local:9443/beers?auth=ca-gateway:1
-
-Consume the Beers service from the MAG:
-
-	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" https://mas.e2e.caworld.local:8443/beers?auth=ca-gateway:1
-
-Test IoT Blinkt service:
-
-Consume the Beers service from the MAG without LAC auth:
-
-        curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/beers?blinkt=true'
-
-Consume the Beers service from the MAG w/ LAC auth:
-
-        curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/beers?auth=ca-gateway:1&blinkt=true'
-
-
-Consume the Blinkt service directly:
-
-	curl -k -4 -i -X POST -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/iot/blinkts/random?delay=100'
-
-
-Consume the Blinkt service in a loop:
-
-	while ((1)); do curl -k -4 -i -X POST -i -H "Authorization: Bearer $ACCESS_TOKEN" "https://mas.e2e.caworld.local:8443/iot/blinkts/random?delay=10"; echo; done
-
-
-
 ### <a name="configuration"></a>Configuration:
-If the custom certs for *.e2e.caworld.local* have not been created in the (config/certs) directory, created them below:
+Create new Virtual Box machine with the name *mas.e2e*
 
-	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mgw.e2e.caworld.local.key -subj "/CN=mgw.e2e.caworld.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mgw.e2e.caworld.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mgw.e2e.caworld.local.cert.pem
+	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true mas.e2e
 
-	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mas.e2e.caworld.local.key -subj "/CN=mas.e2e.caworld.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mas.e2e.caworld.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mas.e2e.caworld.local.cert.pem
+	docker-machine stop mas.e2e
 
-	openssl pkcs12 -export -clcerts -in config/certs/mas.e2e.caworld.local.cert.pem -inkey config/certs/mas.e2e.caworld.local.key -out config/certs/mas.e2e.caworld.local.cert.p12
+Enable the bridge interface for a new network adapter in the Virtual Box machine: 
+Open VirtualBox MAnager. Click Settings -> Network and create a new *Adpater 3". Attach To: *Bridged Adapter*, Name: *Wifi or hard-wired*. Advanced Promiscuous Mode: *Allow All* and enable *Cable Connected*
 
-	openssl pkcs12 -export -clcerts -in config/certs/mgw.e2e.caworld.local.cert.pem -inkey config/certs/mgw.e2e.caworld.local.key -out config/certs/mgw.e2e.caworld.local.cert.p12
+Start the Virtual Box machine
 
+	docker-machine start mas.e2e
+
+Update local /etc/hosts entry if domain controller is not *.caworld.local*
 
 Create a [.custom.caw17.env](.custom.caw17.env) from [.custom.env](.custom.env) with new certificate and environment hostnames. I.E:
 
@@ -116,21 +63,6 @@ export DATABASE_USER=db_admin
 export DATABASE_USER_PASSWORD=UTWtziFHF0xgng==
 ```
 
-Create new Virtual Box machine with the name *mas.e2e*
-
-	docker-machine create --driver=virtualbox --virtualbox-memory=8192 --virtualbox-cpu-count=4 --virtualbox-host-dns-resolver=true mas.e2e
-
-	docker-machine stop mas.e2e
-
-Enable the bridge interface for a new network adapter in the Virtual Box machine: 
-Open VirtualBox MAnager. Click Settings -> Network and create a new *Adpater 3". Attach To: *Bridged Adapter*, Name: *Wifi or hard-wired*. Advanced Promiscuous Mode: *Allow All* and enable *Cable Connected*
-
-Start the Virtual Box machine
-
-	docker-machine start mas.e2e
-
-Update local /etc/hosts entry if domain controller is not *.caworld.local*
-
 Set the environment variables and initialize the Docker Swarm:
 
 	eval $(docker-machine env mas.e2e)
@@ -140,8 +72,7 @@ Set the environment variables and initialize the Docker Swarm:
 	docker node ls
 
 
-### Configure the IoT devices:
-You do not have to configure IoT devices if the devices are not available. 
+### Configure the IoT devices (only if IoT devices are available):
 
 Create a Swarm token environment variable
 
@@ -162,6 +93,71 @@ Loop through the IoT worker hostnames via the IOT_WORKERS environment variable a
 Check that all IoT workers show up as nodes:
 
 	docker node ls
+
+
+### <a name="bootstrap"></a>Bootstrap:
+Deploy the core and Beers application
+
+	export $(grep -v "^#" .env); source .custom.caw17.env;
+
+	docker stack deploy -c docker-compose.yml msd
+
+	docker stack deploy -c docker-compose.beers.yml msd
+
+	docker service ls
+
+Deploy the iot_blinkt service (only if IoT devices are available):
+
+        docker stack deploy -c docker-compose.iot_blinkt.yml msd
+
+	docker service ls
+
+
+### <a name="consume"></a>Consume:
+Make sure all services are healthy before trying to consume them. I.E. *replicas* from `docker service ls` should not have any zeros '0'
+
+Get a Access Token:
+
+	CLIENT_ID=54f0c455-4d80-421f-82ca-9194df24859e; CLIENT_SECRET=a0f2742f-31c7-436f-9802-b7015b8fd8e7; export ACCESS_TOKEN=`curl -s -4 -k -X POST 'Content-Type: application/x-www-form-urlencoded' --data-urlencode "client_id=$CLIENT_ID" --data-urlencode "client_secret=$CLIENT_SECRET" --data-urlencode 'grant_type=client_credentials' --data-urlencode 'scope=mas_storage oob' https://mas.e2e.caworld.local:8443/auth/oauth/v2/token | python  -c "import sys, json; print json.load(sys.stdin)['access_token']"`; echo $ACCESS_TOKEN;
+
+Test Beers service:
+
+Consume the Beers service from the MGW:
+
+	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" https://mgw.e2e.caworld.local:9443/beers?auth=ca-gateway:1
+
+Consume the Beers service from the MAG:
+
+	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" https://mas.e2e.caworld.local:8443/beers?auth=ca-gateway:1
+
+Test IoT Blinkt service:
+
+Consume the Beers service from the MAG without LAC auth:
+
+	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/beers?blinkt=true'
+
+Consume the Beers service from the MAG w/ LAC auth:
+
+	curl -k -4 -i -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/beers?auth=ca-gateway:1&blinkt=true'
+
+Consume the Blinkt service directly:
+
+	curl -k -4 -i -X POST -H "Authorization: Bearer $ACCESS_TOKEN" 'https://mas.e2e.caworld.local:8443/iot/blinkts/random?delay=100'
+
+Consume the Blinkt service in a loop:
+
+	while ((1)); do curl -k -4 -i -X POST -i -H "Authorization: Bearer $ACCESS_TOKEN" "https://mas.e2e.caworld.local:8443/iot/blinkts/random?delay=10"; echo; done
+
+
+### Mobile application:
+Run Cocoapods from the [MicroservicesDemo](../MicroservicesDemo) project directory and open the MicroservicesDemo.xcworkspace with Xcode.
+
+	pod update
+	pod install
+
+Build and Run the app in iOS simulator iPhone > 7 and iOS > 10.x. 
+
+Navigate around the app
 
 
 ### <a name="cleanup"></a>Clean-Up:
