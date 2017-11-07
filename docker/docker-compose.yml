@@ -57,7 +57,7 @@ services:
         limits:
           memory: 256m
   mas:
-    image: caapimcollab/mobile-app-services:4.0.02-beta
+    image: caapimcollab/mobile-app-services:4.0.03-beta
     ports:
       - ${MAS_PORT}:8443
       - 8883:8883

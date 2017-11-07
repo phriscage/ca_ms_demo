@@ -14,7 +14,7 @@ In this tutorial we will extend the Microservices Demo (MSD) configuration and s
 
 *	[README](README.md) - Setup the MSD
 *	[Docker Swarm](ttps://docs.docker.com/engine/swarm) basic knowledge
-*	[Docker Stack]((https://docs.docker.com/engine/swarm/stack-deploy/) basic knowledge
+*	[Docker Stack](https://docs.docker.com/engine/swarm/stack-deploy/) basic knowledge
 *	Docker environment running
 *	Download this [repo](https://github.com/phriscage/ca_ms_demo)
 
@@ -68,8 +68,7 @@ Export variables into current session:
 
 Core services:
 
-	~~docker stack deploy -c docker-compose.yml msd~~ _need to use Docker-MAS 4.0.00-CR01 until IdP is fixed_
-	docker stack deploy -c docker-compose.4.0.00-CR01.yml msd
+	docker stack deploy -c docker-compose.yml msd
 
 Beer services:
 
