@@ -59,4 +59,4 @@ Consume the Blinkt service directly:
 
 Consume the Blinkt service in a loop:
 
-	while ((1)); do curl -k -4 -i -X POST -i -H "Authorization: Bearer $ACCESS_TOKEN" "https://mas.docker.local:8443/iot/blinkts/random?delay=10"; done
+	while ((1)); do curl -k -4 -i -X POST -i -H "Authorization: Bearer $ACCESS_TOKEN" "https://mas.docker.local:8443/iot/blinkts/random?delay=10"; echo; done
