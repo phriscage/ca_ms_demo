@@ -28,13 +28,6 @@ class BeersTableViewController: UITableViewController {
     self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
     self.refreshControl!.addTarget(self, action: #selector(BeersTableViewController.didRefreshControl), for: UIControlEvents.valueChanged)
     
-    // Update the border of the UIBarButtonItems' UIButton to Clear since we deafult all to white in Appdelegate
-    for view in self.navigationController?.navigationBar.subviews as [UIView]! {
-      if let btn = view as? UIButton {
-        btn.layer.borderColor = UIColor.clear.cgColor
-      }
-    }
-    
     self.getBeerList()
     
   }

@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UIButton.appearance().cornerRadius = 5
     UIButton.appearance().borderWidth = 2
     UIButton.appearance().borderColor = UIColor.white
-    
+    // Fix for UIBarButtonItem in UINavigationBar
+    UIButton.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).borderColor = UIColor.clear
+
     return true
   }
   
