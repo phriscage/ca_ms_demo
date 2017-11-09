@@ -164,10 +164,17 @@ Navigate around the app
 Clean all services
 
 	docker stack rm msd
+	docker system prune -f --volumes
 	docker service ls
 
 
 ### Troubleshoting:
+
+If MAS never starts, there is probably an existing database volume that needs to be pruned
+
+	docker stack rm msd
+	docker system prune -f --volume
+
 
 If you get a 401 from LAC (should be 404/403), then run the update to load the json config
 
@@ -179,6 +186,8 @@ If you get a 401 from LAC (should be 404/403), then run the update to load the j
 	}
 	```
 
-	docker service update msd_lac --force
-	docker service update msd_lac_ui --force
+	docker service rm msd_lac msd_lac_ui
+	docker stack deploy -c docker-compose.beers.yml msd
+       	~docker service update msd_lac --force~
+       	~docker service update msd_lac_ui --force~
 
