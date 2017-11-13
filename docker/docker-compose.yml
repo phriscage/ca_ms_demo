@@ -150,6 +150,7 @@ services:
       - ${PWD}/files/mgw/quickstart/iot_blinkt.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/iot_blinkt.json
       - ${PWD}/files/mgw/quickstart/token_exchange.json:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/qs/token_exchange.json
       - ${PWD}/files/mgw/bundles/token_exchange.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/token_exchange.bundle
+      - ${PWD}/files/mgw/bundles/global.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/global.bundle
       # - ${PWD}/files/mgw/bundles/RouteHttp.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/RouteHttp.bundle
       - ${PWD}/files/mgw/bundles/consul.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/consul.bundle
     environment:

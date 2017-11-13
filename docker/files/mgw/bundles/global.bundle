@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<l7:Bundle xmlns:l7="http://ns.l7tech.com/2010/04/gateway-management">
+    <l7:References>
+        <l7:Item>
+            <l7:Name>Global Request log</l7:Name>
+            <l7:Id>baec8168e45ce9e4a8447187974f5279</l7:Id>
+            <l7:Type>POLICY</l7:Type>
+            <l7:TimeStamp>2017-11-13T20:34:20.999Z</l7:TimeStamp>
+            <l7:Resource>
+                <l7:Policy guid="85664540-c7ec-4cdd-900e-23594b67fcdb" id="baec8168e45ce9e4a8447187974f5279" version="2">
+                    <l7:PolicyDetail folderId="0000000000000000ffffffffffffec76" guid="85664540-c7ec-4cdd-900e-23594b67fcdb" id="baec8168e45ce9e4a8447187974f5279" version="2">
+                        <l7:Name>Global Request log</l7:Name>
+                        <l7:PolicyType>Global</l7:PolicyType>
+                        <l7:Properties>
+                            <l7:Property key="revision">
+                                <l7:LongValue>3</l7:LongValue>
+                            </l7:Property>
+                            <l7:Property key="soap">
+                                <l7:BooleanValue>false</l7:BooleanValue>
+                            </l7:Property>
+                            <l7:Property key="tag">
+                                <l7:StringValue>message-received</l7:StringValue>
+                            </l7:Property>
+                        </l7:Properties>
+                    </l7:PolicyDetail>
+                    <l7:Resources>
+                        <l7:ResourceSet tag="policy">
+                            <l7:Resource type="policy">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;wsp:Policy xmlns:L7p="http://www.layer7tech.com/ws/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy"&gt;
+    &lt;wsp:All wsp:Usage="Required"&gt;
+        &lt;L7p:AuditDetailAssertion&gt;
+            &lt;L7p:Detail stringValueReference="inline"&gt;&lt;![CDATA[${request.tcp.remoteIP} [${gateway.time.local}] "${request.http.method} ${request.url}"
+Authorization: ${request.http.header.authorization}]]&gt;&lt;/L7p:Detail&gt;
+            &lt;L7p:LoggingOnly booleanValue="true"/&gt;
+        &lt;/L7p:AuditDetailAssertion&gt;
+    &lt;/wsp:All&gt;
+&lt;/wsp:Policy&gt;
+</l7:Resource>
+                        </l7:ResourceSet>
+                    </l7:Resources>
+                </l7:Policy>
+            </l7:Resource>
+        </l7:Item>
+    </l7:References>
+    <l7:Mappings>
+        <l7:Mapping action="NewOrExisting" srcId="0000000000000000ffffffffffffec76" srcUri="https://10.255.0.11:9443/restman/1.0/folders/0000000000000000ffffffffffffec76" type="FOLDER">
+            <l7:Properties>
+                <l7:Property key="FailOnNew">
+                    <l7:BooleanValue>true</l7:BooleanValue>
+                </l7:Property>
+            </l7:Properties>
+        </l7:Mapping>
+        <l7:Mapping action="NewOrExisting" srcId="baec8168e45ce9e4a8447187974f5279" srcUri="https://10.255.0.11:9443/restman/1.0/policies/baec8168e45ce9e4a8447187974f5279" type="POLICY"/>
+    </l7:Mappings>
+</l7:Bundle>
