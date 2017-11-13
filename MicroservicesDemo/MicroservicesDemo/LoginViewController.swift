@@ -119,7 +119,8 @@ class LoginViewController: UIViewController {
   // MAS User Authentication Trigger
   //
   @IBAction func startButtonAction(_ sender: Any) {
-    
+    print("Start pressed")
+
     MAS.getFrom("/protected/resource/products", withParameters: [:], andHeaders: nil, completion: { (response, error) in
       
       if (error != nil) {
