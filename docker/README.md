@@ -204,20 +204,20 @@ Since we added Rate Limiting in our [Quickstart Beer Data example](files/mgw/qui
 
 ### Custom certificates:
 
-Create custom x509 server certificates and keys for the MAS/OTK and MGW services. This requires **openssl** to be installed on your local system.
+Create custom x509 server certificates and keys for the MAS/OTK and MGW services. This requires **openssl** to be installed on your local system. */usr/local/etc/openssl/openssl.cnf* is the location for **openssl** on OSX. This may differ depending on your system.
 
 Create the self-signed certificate for the MGW using 'mgw.docker.local' as the subject and SAN
 
-	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mgw.key -subj "/CN=mgw.docker.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mgw.docker.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mgw.cert.pem
+	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mgw.docker.local.key -subj "/CN=mgw.docker.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mgw.docker.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mgw.docker.local.cert.pem
 
 Create the self-signed certificate for the MAS/OTK using 'mas.docker.local' as the subject and SAN
 
-	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mas.key -subj "/CN=mas.docker.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mas.docker.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mas.cert.pem
+	openssl req -new -x509 -days 730 -nodes -newkey rsa:4096 -keyout config/certs/mas.docker.local.key -subj "/CN=mas.docker.local" -config <(sed 's/\[ v3_ca \]/\[ v3_ca \]\'$'\nsubjectAltName=DNS:mas.docker.local/' /usr/local/etc/openssl/openssl.cnf) -out config/certs/mas.docker.local.cert.pem
 
 Convert the PEM certificates to PKCS12:
 
-	openssl pkcs12 -export -clcerts -in config/certs/mgw.cert.pem -inkey config/certs/mgw.key -out config/certs/mgw.cert.p12
-	openssl pkcs12 -export -clcerts -in config/certs/mas.cert.pem -inkey config/certs/mas.key -out config/certs/mas.cert.p12
+	openssl pkcs12 -export -clcerts -in config/certs/mgw.docker.local.cert.pem -inkey config/certs/mgw.docker.local.key -out config/certs/mgw.docker.local.cert.p12
+	openssl pkcs12 -export -clcerts -in config/certs/mas.docker.local.cert.pem -inkey config/certs/mas.docker.local.key -out config/certs/mas.docker.local.cert.p12
 
 
 ### Import MGW public certificate to MAS/OTK FIP:
