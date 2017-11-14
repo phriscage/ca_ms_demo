@@ -392,6 +392,7 @@ class BeersTableViewController: UITableViewController {
     
     // Delete the beer
     func deleteBeer(beerId: String, checksum: String) {
+        
         //Show the progress bar
         SVProgressHUD.show(withStatus: Common.Dialogs.deletingBeer)
         

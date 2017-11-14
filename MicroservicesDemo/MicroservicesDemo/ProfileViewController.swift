@@ -12,6 +12,7 @@ import MASFoundation
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var beerBlinktOnButton: UIButton!
+    @IBOutlet var defaultBlinktCountField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,11 @@ class ProfileViewController: UIViewController {
             beerBlinktOnButton.setTitle("Beer Blinkt Off".capitalized, for: .normal)
             beerBlinktOnButton.setTitleColor(UIColor.white, for: .normal)
         }
+        
+        defaultBlinktCountField.attributedPlaceholder = NSAttributedString(string: "Default Blinkt Count", attributes: [NSForegroundColorAttributeName : UIColor.lightGray])
+        defaultBlinktCountField.textColor = UIColor.white
+        defaultBlinktCountField.text = String(Common.Constants.defaultBlinktCount)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,10 +72,19 @@ class ProfileViewController: UIViewController {
     // Button Logout tapped
     //
     @IBAction func logout(_ sender: Any) {
-        
+        print("logout clicked")
         if (MASUser.current() != nil) {
-            let user = MASUser.current()?.userName
-            
+            confirmLogout(user: (MASUser.current()?.userName)!)
+        }
+
+    }
+    
+    // confirm logout
+    func confirmLogout(user: String) {
+        let alert = UIAlertController(title: "Are you sure you want to logout?\n\(user)", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+        
             if (MASUser.current()?.isAuthenticated)! {
                 MASUser.current()?.logout(completion: { (completed: Bool, error: Error?) in
                     if (error != nil) {
@@ -77,15 +92,16 @@ class ProfileViewController: UIViewController {
                         print("Error during user logout: \(error?.localizedDescription ?? "unknown")")
                     } else {
                         //No errors
-                        print("User \(user ?? "unknown") logged out - Showing the LoginViewController")
+                        print("User \(user) logged out - Showing the LoginViewController")
                         //self.showLogin()
                         let controller:UIViewController = LoginViewController()
                         self.present(controller, animated: true, completion: nil)
                     }
                 })
             }
-            
-        }
-        
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 }

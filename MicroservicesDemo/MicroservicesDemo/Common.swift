@@ -26,7 +26,9 @@ class Common: NSObject {
     static let themeSelectedColor = UIColor(red:0.16, green:0.84, blue:0.99, alpha:1.0)
     static let themeNotSelectedColor = UIColor.white
     
+    // enable these to be set in the controllers
     static var BeerBlinktOn = false
+    static var defaultBlinktCount = 20
     
   }
   
@@ -37,6 +39,7 @@ class Common: NSObject {
     static let addingNewBeer = "Adding new Beer..."
     static let updatingBeer = "Updating Beer..."
     static let deletingBeer = "Deleting Beer..."
+    static let postingBlinkt = "Turning Blinkts"
 
   }
   
