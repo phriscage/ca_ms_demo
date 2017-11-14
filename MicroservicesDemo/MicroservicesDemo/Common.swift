@@ -26,6 +26,8 @@ class Common: NSObject {
     static let themeSelectedColor = UIColor(red:0.16, green:0.84, blue:0.99, alpha:1.0)
     static let themeNotSelectedColor = UIColor.white
     
+    static var BeerBlinktOn = false
+    
   }
   
   //Dialogs
